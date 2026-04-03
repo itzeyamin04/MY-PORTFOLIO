@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eyamin Evnay Payel — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<div class="nebula nb1"></div>
+<div class="nebula nb2"></div>
+<div class="nebula nb3"></div>
+<canvas id="star-canvas"></canvas>
+
+<div class="content">
+
+<nav>
+  <a href="#hero" class="nav-logo">E<span>.</span>Payel</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="theme-btn" onclick="toggleTheme()">☽</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="ey-line"></div>CIS Student · BMCC · New York</div>
+    <h1 class="hero-name">Eyamin<br><span class="gw">Evnay</span><br>Payel</h1>
+    <p class="hero-tagline">Developer &amp; Creative</p>
+    <div class="typing-wrap"><span id="typed-text"></span><span class="typing-cursor"></span></div>
+    <p class="hero-bio">Building at the intersection of technology and creativity — crafting web experiences, wrangling data, and capturing the world through a lens.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Work ↓</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <div class="avatar-wrap">
+      <!-- floating skill orbs -->
+      <div class="skill-orb so1">🌐</div>
+      <div class="skill-orb so2">🐍</div>
+      <div class="skill-orb so3">⚡</div>
+      <div class="skill-orb so4">🗄️</div>
+      <div class="skill-orb so5">📷</div>
+      <div class="skill-orb so6">🎨</div>
+
+      <!-- outer glow pulse -->
+      <div class="avatar-glow"></div>
+      <!-- spinning gradient border -->
+      <div class="avatar-ring-spin"></div>
+      <!-- white gap -->
+      <div class="avatar-ring-gap"></div>
+      <!-- photo clipped to circle -->
+      <div class="avatar-photo">
+        <img src="EYAMIN.jpeg" alt="Eyamin Payel">
+      </div>
+      <div class="avatar-badge">✦ Open to work</div>
+    </div>
+  </div>
+
+  <div class="ticker">
+    <div class="ticker-inner">
+      <span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JavaScript</span><span>✦</span><span>Python</span><span>✦</span><span>SQL</span><span>✦</span><span>Photography</span><span>✦</span><span>AI Tools</span><span>✦</span><span>GitHub</span><span>✦</span>
+      <span>HTML</span><span>✦</span><span>CSS</span><span>✦</span><span>JavaScript</span><span>✦</span><span>Python</span><span>✦</span><span>SQL</span><span>✦</span><span>Photography</span><span>✦</span><span>AI Tools</span><span>✦</span><span>GitHub</span><span>✦</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section id="projects">
+  <div class="h-ticker"><div class="h-ticker-inner"><span>Selected Work</span><span>◇</span><span>Portfolio</span><span>◇</span><span>Vlog Platform</span><span>◇</span><span>Calculator</span><span>◇</span><span>Selected Work</span><span>◇</span><span>Portfolio</span><span>◇</span><span>Vlog Platform</span><span>◇</span><span>Calculator</span><span>◇</span></div></div>
+  <div class="sec-row rv-up"><div><div class="sec-label">01 — Projects</div><h2 class="sec-title">Selected Work</h2></div><div class="sec-rule"></div></div>
+  <div class="projects-grid">
+
+    <!-- Project 01: Personal Portfolio -->
+    <div class="project-card rv-up">
+      <div class="proj-num">Project 01</div>
+      <span class="proj-icon">🌐</span>
+      <h3 class="proj-title">Personal Portfolio</h3>
+      <p class="proj-desc">A modern, responsive portfolio with 3D elements via Three.js, dark mode toggle, smooth navigation, and blazing-fast performance.</p>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Three.js</span><span class="tag">Responsive</span><span class="tag">Dark Mode</span></div>
+    </div>
+
+    <!-- Project 02: Love Vlog Website — add your URL in the href below -->
+    <a href="YOUR_LOVE_VLOG_URL_HERE" target="_blank" class="project-card rv-up" style="transition-delay:.12s;text-decoration:none;display:block;">
+      <div class="proj-num">Project 02</div>
+      <span class="proj-icon">❤️</span>
+      <h3 class="proj-title">Love Vlog Website</h3>
+      <p class="proj-desc">A personal vlog platform centered on storytelling and content sharing — clean layouts that let narrative breathe, engagement-first design.</p>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">Storytelling</span><span class="tag">UX Design</span></div>
+      <span class="proj-link">View Project →</span>
+    </a>
+
+    <!-- Project 03: Responsive Calculator -->
+    <div class="project-card rv-up" style="transition-delay:.24s">
+      <div class="proj-num">Project 03</div>
+      <span class="proj-icon">🧮</span>
+      <h3 class="proj-title">Responsive Calculator</h3>
+      <p class="proj-desc">Fully responsive with keyboard support, clean UI, and fast performance. Works flawlessly across every screen size and input method.</p>
+      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Keyboard Nav</span></div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="bg-word">Skills</div>
+  <div class="sec-row rv-up"><div><div class="sec-label">02 — Skills</div><h2 class="sec-title">What I Know</h2></div><div class="sec-rule"></div></div>
+  <div class="skills-layout">
+    <div>
+      <div class="skgrp-label rv-left">Frontend</div>
+      <div class="skill-row rv-left"><span class="sk-icon">🌐</span><span class="sk-name">HTML</span><div class="sk-track"><div class="sk-fill" data-w="90"></div></div></div>
+      <div class="skill-row rv-left" style="transition-delay:.07s"><span class="sk-icon">🎨</span><span class="sk-name">CSS</span><div class="sk-track"><div class="sk-fill" data-w="82"></div></div></div>
+      <div class="skill-row rv-left" style="transition-delay:.14s"><span class="sk-icon">⚡</span><span class="sk-name">JavaScript</span><div class="sk-track"><div class="sk-fill" data-w="55"></div></div></div>
+      <div class="skgrp-label rv-left" style="transition-delay:.18s">Languages</div>
+      <div class="skill-row rv-left" style="transition-delay:.22s"><span class="sk-icon">🐍</span><span class="sk-name">Python</span><div class="sk-track"><div class="sk-fill" data-w="60"></div></div></div>
+      <div class="skgrp-label rv-left" style="transition-delay:.26s">Data</div>
+      <div class="skill-row rv-left" style="transition-delay:.30s"><span class="sk-icon">🗄️</span><span class="sk-name">SQL</span><div class="sk-track"><div class="sk-fill" data-w="68"></div></div></div>
+      <div class="skgrp-label rv-left" style="transition-delay:.34s">Other</div>
+      <div class="skill-row rv-left" style="transition-delay:.38s"><span class="sk-icon">🤖</span><span class="sk-name">AI Tools</span><div class="sk-track"><div class="sk-fill" data-w="88"></div></div></div>
+      <div class="skill-row rv-left" style="transition-delay:.43s"><span class="sk-icon">📷</span><span class="sk-name">Photography</span><div class="sk-track"><div class="sk-fill" data-w="78"></div></div></div>
+      <div class="skill-row rv-left" style="transition-delay:.48s"><span class="sk-icon">💬</span><span class="sk-name">Customer Service</span><div class="sk-track"><div class="sk-fill" data-w="92"></div></div></div>
+    </div>
+    <div>
+      <div class="tools-panel rv-right"><div class="panel-title">Tools & Platforms</div><div class="chip-cloud"><span class="chip">GitHub</span><span class="chip">Three.js</span><span class="chip">VS Code</span><span class="chip">Claude AI</span><span class="chip">Git</span><span class="chip">Chrome DevTools</span></div></div>
+      <div class="tools-panel rv-right" style="margin-top:1.5rem;transition-delay:.15s"><div class="panel-title">Currently Learning</div><div class="chip-cloud"><span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">Data Management</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-row rv-up"><div><div class="sec-label">03 — About</div><h2 class="sec-title">The Story</h2></div><div class="sec-rule"></div></div>
+  <div class="about-layout">
+    <div>
+      <p class="about-p rv-up">I'm <em>Eyamin Evnay Payel</em>, a Computer Information Systems student at BMCC with a deep curiosity for where technology meets human creativity.</p>
+      <p class="about-p rv-up" style="transition-delay:.1s">My academic path has given me strong foundations in <em>web development and data management</em>, while my creative side finds expression through photography.</p>
+      <p class="about-p rv-up" style="transition-delay:.2s">Whether architecting a responsive layout or composing a photograph, I bring the same care: <em>make it work beautifully</em>.</p>
+      <p class="about-p rv-up" style="transition-delay:.3s">My long-term vision is <em>entrepreneurship</em> — building a technology-driven business from the ground up.</p>
+    </div>
+    <div class="rv-right">
+      <div class="goals-card">
+        <div class="goals-title">Future Goals</div>
+        <div class="goal-item"><span class="goal-arr">→</span>Start a technology-driven business</div>
+        <div class="goal-item"><span class="goal-arr">→</span>Master full-stack web development</div>
+        <div class="goal-item"><span class="goal-arr">→</span>Expand into data analytics</div>
+        <div class="goal-item"><span class="goal-arr">→</span>Grow a creative photography portfolio</div>
+        <div class="goal-item"><span class="goal-arr">→</span>Build products that matter to real users</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-glow"></div>
+  <div class="contact-inner">
+    <div class="sec-label rv-up" style="margin-bottom:1rem;">04 — Contact</div>
+    <h2 class="contact-big rv-up">Let's build something<br><span>together.</span></h2>
+    <p class="contact-sub rv-up">Whether you have a project in mind, an opportunity to share, or just want to connect — my inbox is always open.</p>
+    <div class="contact-btns rv-up">
+      <a href="/cdn-cgi/l/email-protection#ec89958d818582899a828d959c8d958980ac8b818d8580c28f8381" class="btn btn-primary">✉ Email Me</a>
+      <a href="https://github.com/itzeyamin04" target="_blank" class="btn btn-outline">⌥ GitHub</a>
+      <a href="https://www.linkedin.com/in/eyamin-evnay-payel-098b641b0/" target="_blank" class="btn btn-outline">in LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Eyamin Evnay Payel</span>
+  <span>Built with HTML · CSS · JS · ✦</span>
+  <a href="#hero">Back to top ↑</a>
+</footer>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* CURSOR */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animRing(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
+
+/* CLICK BURST */
+document.addEventListener('click',e=>{
+  const cols=['#b57bee','#7b8ef5','#f4c96e','#ff9de2','#fff'];
+  for(let i=0;i<12;i++){
+    const p=document.createElement('div');p.className='burst';
+    const a=Math.random()*Math.PI*2,d=40+Math.random()*70;
+    p.style.cssText=`left:${e.clientX}px;top:${e.clientY}px;background:${cols[Math.floor(Math.random()*cols.length)]};--dx:${Math.cos(a)*d}px;--dy:${Math.sin(a)*d}px;animation-duration:${.5+Math.random()*.4}s`;
+    document.body.appendChild(p);setTimeout(()=>p.remove(),900);
+  }
+});
+
+/* STARS */
+const canvas=document.getElementById('star-canvas'),ctx=canvas.getContext('2d');
+let W,H,stars=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',()=>{resize();initStars()});
+function initStars(){
+  stars=[];const n=Math.floor(W*H/4500);
+  for(let i=0;i<n;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:.2+Math.random()*1.3,op:.1+Math.random()*.7,tp:Math.random()*Math.PI*2,ts:.004+Math.random()*.018,pf:.04+Math.random()*.4,bright:false});
+  for(let i=0;i<10;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:1.2+Math.random()*1.6,op:.8,tp:Math.random()*Math.PI*2,ts:.012,pf:.06,bright:true});
+}
+initStars();
+(function draw(){
+  ctx.clearRect(0,0,W,H);const sy=window.scrollY;
+  stars.forEach(s=>{
+    s.tp+=s.ts;const tw=.45+.55*Math.sin(s.tp),op=s.op*(s.bright?.5+.5*tw:.3+.7*tw),dy=s.y-sy*s.pf;
+    if(s.bright){
+      ctx.save();ctx.globalAlpha=op*.25;ctx.strokeStyle='#b57bee';ctx.lineWidth=.5;
+      ctx.beginPath();ctx.moveTo(s.x-s.r*5,dy);ctx.lineTo(s.x+s.r*5,dy);ctx.moveTo(s.x,dy-s.r*5);ctx.lineTo(s.x,dy+s.r*5);ctx.stroke();ctx.restore();
+      const g=ctx.createRadialGradient(s.x,dy,0,s.x,dy,s.r*5);g.addColorStop(0,`rgba(181,123,238,${op*.25})`);g.addColorStop(1,'transparent');
+      ctx.beginPath();ctx.arc(s.x,dy,s.r*5,0,Math.PI*2);ctx.fillStyle=g;ctx.fill();
+    }
+    ctx.beginPath();ctx.arc(s.x,dy,s.r,0,Math.PI*2);ctx.fillStyle=s.bright?`rgba(181,123,238,${op})`:`rgba(255,255,255,${op})`;ctx.fill();
+  });
+  requestAnimationFrame(draw);
+})();
+
+/* TYPING */
+const phrases=['Web Developer','Creative Coder','Photographer','SQL Explorer','Python Learner','Future Founder'];
+let pi=0,ci=0,del=false,wait=0;
+function type(){
+  const el=document.getElementById('typed-text');if(!el)return;
+  if(wait>0){wait--;setTimeout(type,50);return}
+  const ph=phrases[pi];
+  if(!del){ci++;el.textContent=ph.slice(0,ci);if(ci===ph.length){del=true;wait=35;setTimeout(type,50)}else setTimeout(type,75);}
+  else{ci--;el.textContent=ph.slice(0,ci);if(ci===0){del=false;pi=(pi+1)%phrases.length;wait=8;setTimeout(type,50)}else setTimeout(type,40);}
+}
+setTimeout(type,1800);
+
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');e.target.querySelectorAll('.sk-fill').forEach((f,i)=>setTimeout(()=>{const w=f.getAttribute('data-w');if(w)f.style.width=w+'%'},i*80));}});
+},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.rv-up,.rv-left,.rv-right').forEach(el=>obs.observe(el));
+const skObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){setTimeout(()=>document.querySelectorAll('.sk-fill').forEach((f,i)=>setTimeout(()=>{const w=f.getAttribute('data-w');if(w)f.style.width=w+'%'},i*90)),200);skObs.disconnect();}});},{threshold:.15});
+const sk=document.querySelector('#skills');if(sk)skObs.observe(sk);
+
+/* THEME */
+let light=false;
+function toggleTheme(){light=!light;document.documentElement.setAttribute('data-theme',light?'light':'');document.querySelector('.theme-btn').textContent=light?'☽':'☀';}
+
+/* NAV ACTIVE */
+const secs=document.querySelectorAll('section[id]'),nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.id});nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'var(--accent)':''})});
+</script>
+</body>
+</html>
