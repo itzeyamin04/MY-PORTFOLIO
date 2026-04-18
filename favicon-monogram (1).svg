@@ -1,0 +1,19 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Cream paper background -->
+  <rect width="512" height="512" fill="#f3ede2"/>
+  
+  <!-- Elegant italic serif "E" -->
+  <text x="256" y="385" 
+        font-family="'Fraunces', 'Playfair Display', 'Didot', 'Bodoni 72', Georgia, serif" 
+        font-size="480" 
+        font-weight="400"
+        font-style="italic"
+        text-anchor="middle" 
+        fill="#1a1511">E</text>
+  
+  <!-- Small star accent -->
+  <text x="405" y="445" 
+        font-family="serif" 
+        font-size="52" 
+        fill="#c73e1d">✦</text>
+</svg>
