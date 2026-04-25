@@ -1710,5 +1710,157 @@ function toggleTheme() {
   document.querySelector('.theme-toggle').textContent = dark ? '◑' : '◐';
 }
 </script>
+
+<!-- F.R.I.D.A.Y CHAT WIDGET -->
+<style>
+#friday-btn {
+  position:fixed;bottom:2rem;right:2rem;z-index:1000;
+  width:52px;height:52px;border-radius:50%;
+  background:var(--ink);border:2px solid var(--accent);
+  color:var(--paper);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;transition:transform .3s,background .3s;
+  box-shadow:0 4px 20px rgba(0,0,0,.25);
+}
+#friday-btn:hover{background:var(--accent);transform:scale(1.08);}
+.friday-tooltip{
+  position:absolute;right:60px;white-space:nowrap;
+  background:var(--ink);color:var(--paper);
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;
+  padding:.3rem .7rem;opacity:0;pointer-events:none;
+  transition:opacity .2s;text-transform:uppercase;
+}
+#friday-btn:hover .friday-tooltip{opacity:1;}
+
+#friday-panel{
+  position:fixed;bottom:5.5rem;right:2rem;z-index:1000;
+  width:360px;max-height:520px;
+  background:var(--paper);border:1px solid var(--ink);
+  display:none;flex-direction:column;
+  box-shadow:0 8px 40px rgba(0,0,0,.18);
+  animation:chatSlideUp .25s cubic-bezier(.22,1,.36,1);
+}
+#friday-panel.open{display:flex;}
+@keyframes chatSlideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.chat-header{
+  background:var(--ink);color:var(--paper);
+  padding:.9rem 1.2rem;
+  display:flex;justify-content:space-between;align-items:center;
+  border-bottom:2px solid var(--accent);
+}
+.chat-header-info{display:flex;flex-direction:column;gap:.15rem;}
+.chat-title{font-family:var(--display);font-weight:900;font-size:1rem;letter-spacing:-.01em;}
+.chat-title em{font-family:var(--italic);color:var(--accent);font-weight:400;font-style:italic;}
+.chat-sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(243,237,226,.5);}
+.chat-close{background:none;border:none;color:var(--paper);font-size:1.1rem;cursor:pointer;opacity:.6;padding:.2rem;}
+.chat-close:hover{opacity:1;}
+
+.chat-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.8rem;max-height:340px;}
+.chat-messages::-webkit-scrollbar{width:4px;}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--ink);}
+
+.msg{max-width:88%;font-size:.87rem;line-height:1.55;padding:.6rem .85rem;}
+.msg-friday{align-self:flex-start;background:var(--cream);border-left:2px solid var(--accent);font-family:var(--serif);}
+.msg-sender{font-family:var(--mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem;}
+.msg-user{align-self:flex-end;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:.8rem;}
+
+.chat-typing{align-self:flex-start;background:var(--cream);border-left:2px solid var(--accent);padding:.6rem .85rem;display:none;}
+.typing-dots{display:flex;gap:.3rem;align-items:center;}
+.typing-dots span{width:5px;height:5px;border-radius:50%;background:var(--accent);animation:tdot 1.2s infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes tdot{0%,80%,100%{opacity:.2}40%{opacity:1}}
+
+.chat-input-row{border-top:1px solid var(--line);display:flex;align-items:stretch;}
+#chat-input{flex:1;border:none;padding:.75rem 1rem;font-family:var(--serif);font-size:.87rem;outline:none;background:var(--paper);color:var(--ink);}
+.chat-send{background:var(--accent);color:#fff;border:none;padding:0 1.1rem;cursor:pointer;font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;transition:background .2s;}
+.chat-send:hover{background:#a32f15;}
+.chat-send:disabled{background:var(--muted);cursor:not-allowed;}
+</style>
+
+<button id="friday-btn" onclick="fridayToggle()" title="Chat with F.R.I.D.A.Y">
+  <span class="friday-tooltip">Ask F.R.I.D.A.Y</span>
+  ✦
+</button>
+
+<div id="friday-panel">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <span class="chat-title">F.R.I.D.A.Y <em>AI</em></span>
+      <span class="chat-sub">Personal Assistant · Always on</span>
+    </div>
+    <button class="chat-close" onclick="fridayToggle()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg msg-friday">
+      <div class="msg-sender">F.R.I.D.A.Y</div>
+      Hello — I'm F.R.I.D.A.Y, Eyamin's personal assistant. Ask me about his work, skills, or how to reach him.
+    </div>
+  </div>
+  <div class="chat-typing" id="chat-typing">
+    <div class="typing-dots"><span></span><span></span><span></span></div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" placeholder="Ask something…" onkeydown="if(event.key==='Enter')fridaySend()">
+    <button class="chat-send" id="chat-send-btn" onclick="fridaySend()">Send</button>
+  </div>
+</div>
+
+<script>
+// Replace with your Cloudflare Tunnel URL after setup
+const FRIDAY_API = "REPLACE_WITH_TUNNEL_URL/chat";
+let fridayHistory = [];
+let fridayOpen = false;
+
+function fridayToggle() {
+  fridayOpen = !fridayOpen;
+  document.getElementById("friday-panel").classList.toggle("open", fridayOpen);
+  if (fridayOpen) document.getElementById("chat-input").focus();
+}
+
+function fridayAppend(role, text) {
+  const box = document.getElementById("chat-messages");
+  const div = document.createElement("div");
+  if (role === "friday") {
+    div.className = "msg msg-friday";
+    div.innerHTML = '<div class="msg-sender">F.R.I.D.A.Y</div>' + text;
+  } else {
+    div.className = "msg msg-user";
+    div.textContent = text;
+  }
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+async function fridaySend() {
+  const input = document.getElementById("chat-input");
+  const btn   = document.getElementById("chat-send-btn");
+  const text  = input.value.trim();
+  if (!text) return;
+  input.value = "";
+  fridayAppend("user", text);
+  fridayHistory.push({ role: "user", content: text });
+  const typing = document.getElementById("chat-typing");
+  typing.style.display = "block";
+  btn.disabled = true;
+  document.getElementById("chat-messages").scrollTop = 9999;
+  try {
+    const res  = await fetch(FRIDAY_API, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({messages: fridayHistory}) });
+    const json = await res.json();
+    const reply = json.ok ? json.reply : "I'm having a little trouble connecting right now. Try again shortly.";
+    fridayHistory.push({ role:"assistant", content:reply });
+    typing.style.display = "none";
+    fridayAppend("friday", reply);
+  } catch(e) {
+    typing.style.display = "none";
+    fridayAppend("friday", "Connection error — please try again in a moment.");
+  } finally {
+    btn.disabled = false;
+    input.focus();
+  }
+}
+</script>
+
 </body>
 </html>
