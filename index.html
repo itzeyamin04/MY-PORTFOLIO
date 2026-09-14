@@ -1204,6 +1204,7 @@ section { padding: 5rem 2rem; position: relative; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#works">Skip to selected work</a>
 
 <!-- cursor -->
 <div id="cursor"></div>
@@ -1214,7 +1215,7 @@ section { padding: 5rem 2rem; position: relative; }
   <div class="masthead-left">
     <span class="dot">●</span>
     <span>VOL. I</span>
-    <span>MMXXV</span>
+    <span>MMXXVI</span>
   </div>
   <div class="masthead-center">The <em>Payel</em> Archive</div>
   <div class="masthead-right">
@@ -1222,7 +1223,7 @@ section { padding: 5rem 2rem; position: relative; }
     <a href="#dossier">About</a>
     <a href="#gallery">Gallery</a>
     <a href="#correspondence">Contact</a>
-    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">◐</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Switch color theme" aria-pressed="false">◐</button>
   </div>
 </header>
 
@@ -1255,8 +1256,9 @@ section { padding: 5rem 2rem; position: relative; }
     <div class="hero-col">
       <div class="col-label"><span>Biography</span><span>I</span></div>
       <p class="drop-cap">
-        Born of equal parts <em>curiosity</em> and <em>craft</em>. A CIS student at BMCC by day, a builder of strange and beautiful things by night. I work where logic softens into aesthetics — between the grid and the glow, the code and the composition.
+        I build <em>web experiences</em>, personal AI tools, and mobile apps. Based in New York and studying Computer Information Systems at BMCC, I bring a photographer’s eye to the things I make.
       </p>
+      <div class="hero-actions"><a class="primary-link" href="#works">Explore my work <span aria-hidden="true">↗</span></a><a href="#correspondence">Get in touch <span aria-hidden="true">↗</span></a></div>
     </div>
 
     <!-- CENTER: portrait -->
@@ -1265,7 +1267,7 @@ section { padding: 5rem 2rem; position: relative; }
         <div class="portrait-bg">
           <div class="portrait-inner">
             <!-- Real portrait photo -->
-            <img src="portrait.jpg" alt="Eyamin Evnay Payel" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: brightness(1) contrast(1) saturate(1);">
+            <img fetchpriority="high" decoding="async" src="portrait.jpg" alt="Eyamin Evnay Payel" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: brightness(1) contrast(1) saturate(1);">
           </div>
         </div>
         <div class="portrait-caption">EYAMIN. Self-portrait, 2026</div>
@@ -1351,7 +1353,7 @@ section { padding: 5rem 2rem; position: relative; }
         </svg>
       </div>
       <h3 class="work-title">F.R.I.D.A.Y AI</h3>
-      <p class="work-desc">Female Replacement Intelligent Digital Assistant Youth — a personal AI assistant built in Python with voice, chat, browser control, Spotify, Gmail integration, and agentic tool-calling.</p>
+      <p class="work-desc">A personal AI assistant that connects voice and chat with everyday tools. Built in Python with browser control, Spotify, Gmail, and agentic tool-calling.</p>
       <div class="work-tags">
         <span class="work-tag">Python</span>
         <span class="work-tag">OpenAI</span>
@@ -1384,11 +1386,11 @@ section { padding: 5rem 2rem; position: relative; }
         </svg>
       </div>
       <h3 class="work-title">Personal Portfolio</h3>
-      <p class="work-desc">A living archive of work, presented with care. Three.js-powered, responsive, dark/light modes, and smooth typography-driven navigation.</p>
+      <p class="work-desc">A living archive of work, presented with care. Responsive layouts, light and dark themes, and typography-driven navigation.</p>
       <div class="work-tags">
         <span class="work-tag">HTML</span>
         <span class="work-tag">CSS</span>
-        <span class="work-tag">Three.js</span>
+        <span class="work-tag">JavaScript</span>
         <span class="work-tag">Live</span>
       </div>
     </article>
@@ -1517,7 +1519,7 @@ section { padding: 5rem 2rem; position: relative; }
           Islamic Daily Companion — a full-featured mobile app with real-time location-based prayer times, salah streak tracking, smart dual notifications with adhan sounds, Qibla compass, Qaza counter, and a Quran quote slideshow. Built solo from the ground up as a spiritually grounding, technically modern experience.
         </p>
         <a href="https://drive.google.com/uc?export=download&id=1U6S3av8EJi0YtlCCWTP1ksZ1OC-hDJga" 
-   target="_blank"
+   target="_blank" rel="noopener noreferrer"
    class="btn-download" style="align-self:flex-start;margin-top:.5rem;">
           <span>↓ Download APK</span>
         </a>
@@ -1675,43 +1677,43 @@ section { padding: 5rem 2rem; position: relative; }
   <div class="gallery-grid">
     <!-- Plate I: Architecture / tall building looking up -->
     <div class="photo photo-1 rv">
-      <div class="photo-visual"><img src="gallery/plate-1.jpg" alt="Gallery plate 1" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(0.95) contrast(1.05) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-1.jpg" loading="lazy" decoding="async" alt="Peace of Mind, New York" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(0.95) contrast(1.05) saturate(1);"></div>
       <div class="photo-caption">Plate I · Peace of Mind, NY</div>
     </div>
 
     <!-- Plate II: Sunset silhouette -->
     <div class="photo photo-2 rv">
-      <div class="photo-visual"><img src="gallery/plate-2.jpg" alt="Gallery plate 2" style="width:100%;height:100%;object-fit:cover;object-position:47% 100%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-2.jpg" loading="lazy" decoding="async" alt="Personal Photographer, New York" style="width:100%;height:100%;object-fit:cover;object-position:47% 100%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate II · Personal Photographer, NY</div>
     </div>
 
     <!-- Plate III: Street portrait / film -->
     <div class="photo photo-3 rv">
-      <div class="photo-visual"><img src="gallery/plate-3.jpg" alt="Gallery plate 3" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-3.jpg" loading="lazy" decoding="async" alt="Sunset" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate III · Sunset</div>
     </div>
 
     <!-- Plate IV: Still life / flowers -->
     <div class="photo photo-4 rv">
-      <div class="photo-visual"><img src="gallery/plate-4.jpg" alt="Gallery plate 4" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-4.jpg" loading="lazy" decoding="async" alt="Snow Carpet, Central Park" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate IV · Snow Carpet, Central Park</div>
     </div>
 
     <!-- Plate V: Night city -->
     <div class="photo photo-5 rv">
-      <div class="photo-visual"><img src="gallery/plate-5.jpg" alt="Gallery plate 5" style="width:100%;height:100%;object-fit:cover;object-position:39% 51%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-5.jpg" loading="lazy" decoding="async" alt="Rockway Sunset, Rockway Beach" style="width:100%;height:100%;object-fit:cover;object-position:39% 51%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate V · Rockway Sunset, Rockway Beach</div>
     </div>
 
     <!-- Plate VI: Abstract texture -->
     <div class="photo photo-6 rv">
-      <div class="photo-visual"><img src="gallery/plate-6.jpg" alt="Gallery plate 6" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-6.jpg" loading="lazy" decoding="async" alt="Wave in the Sky" style="width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate VI · Wave in The Sky</div>
     </div>
 
     <!-- Plate VII: Portrait -->
     <div class="photo photo-7 rv">
-      <div class="photo-visual"><img src="gallery/plate-7.jpg" alt="Gallery plate 7" style="width:100%;height:100%;object-fit:cover;object-position:50% 75%;filter:brightness(1) contrast(1) saturate(1);"></div>
+      <div class="photo-visual"><img src="gallery/plate-7.jpg" loading="lazy" decoding="async" alt="Tools of observation" style="width:100%;height:100%;object-fit:cover;object-position:50% 75%;filter:brightness(1) contrast(1) saturate(1);"></div>
       <div class="photo-caption">Plate VII · Tools of observation</div>
     </div>
   </div>
@@ -1729,18 +1731,18 @@ section { padding: 5rem 2rem; position: relative; }
     <div class="doc-stamp">✦ Document · N°001</div>
     <h2 class="doc-title">The <em>Résumé.</em></h2>
     <p class="doc-sub">
-      For the formalities. A one-page record of education, experience, and what I bring to a team.
+      For a closer look at my education, experience, and skills, get in touch for my résumé.
     </p>
 
     <div class="resume-card">
       <div class="resume-icon"></div>
       <div>
-        <div class="resume-info-label">File</div>
-        <div class="resume-info-title">Payel-Résumé-2026.pdf</div>
-        <div class="resume-info-meta"><em>updated April 2026 · ~92kb</em></div>
+        <div class="resume-info-label">Available on request</div>
+        <div class="resume-info-title">Eyamin Evnay Payel</div>
+        <div class="resume-info-meta"><em>Education, experience, and skills</em></div>
       </div>
-      <a href="#" class="btn-download" onclick="alert('Add your resume.pdf to the repo and update the href!'); return false;">
-        <span>↓ Download</span>
+      <a href="mailto:eyaminevnaypayel@gmail.com?subject=Resume%20request" class="btn-download">
+        <span>Request résumé ↗</span>
       </a>
     </div>
 
@@ -1764,7 +1766,7 @@ section { padding: 5rem 2rem; position: relative; }
     </p>
     <div class="corr-links rv">
       <a href="mailto:eyaminevnaypayel@gmail.com" class="corr-link">✉ Email</a>
-      <a href="https://github.com/itzeyamin04" target="_blank" class="corr-link">◆ GitHub</a>
+      <a href="https://github.com/itzeyamin04" target="_blank" rel="noopener noreferrer" class="corr-link">◆ GitHub</a>
       <a href="https://www.linkedin.com/in/eyamin-evnay-payel-098b641b0/" class="corr-link">in LinkedIn</a>
       <a href="https://www.instagram.com/im_eyamin__/" class="corr-link">◉ Instagram</a>
     </div>
@@ -1781,23 +1783,6 @@ section { padding: 5rem 2rem; position: relative; }
 </footer>
 
 <script>
-// ── CURSOR ──
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cur.style.left = mx + 'px';
-  cur.style.top = my + 'px';
-});
-(function ringAnim() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(ringAnim);
-})();
-
 // ── SCROLL REVEALS ──
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1807,12 +1792,19 @@ const io = new IntersectionObserver((entries) => {
 document.querySelectorAll('.rv').forEach(el => io.observe(el));
 
 // ── THEME TOGGLE ──
-let dark = false;
-function toggleTheme() {
-  dark = !dark;
+let dark = matchMedia('(prefers-color-scheme: dark)').matches;
+try { const saved = localStorage.getItem('payel-theme'); if (saved) dark = saved === 'dark'; } catch {}
+function applyTheme() {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
-  document.querySelector('.theme-toggle').textContent = dark ? '◑' : '◐';
+  const button = document.querySelector('.theme-toggle');
+  button.textContent = dark ? '◑' : '◐';
+  button.setAttribute('aria-pressed', String(dark));
 }
+function toggleTheme() {
+  dark = !dark; applyTheme();
+  try { localStorage.setItem('payel-theme', dark ? 'dark' : 'light'); } catch {}
+}
+applyTheme();
 </script>
 
 <!-- F.R.I.D.A.Y CHAT WIDGET -->
@@ -1883,20 +1875,20 @@ function toggleTheme() {
 .chat-send:disabled{background:var(--muted);cursor:not-allowed;}
 </style>
 
-<button id="friday-btn" onclick="fridayToggle()" title="Chat with F.R.I.D.A.Y">
+<button id="friday-btn" onclick="fridayToggle()" title="Chat with F.R.I.D.A.Y" aria-label="Chat with F.R.I.D.A.Y" aria-expanded="false" aria-controls="friday-panel">
   <span class="friday-tooltip">Ask F.R.I.D.A.Y</span>
   ✦
 </button>
 
-<div id="friday-panel">
+<div id="friday-panel" role="region" aria-label="F.R.I.D.A.Y assistant">
   <div class="chat-header">
     <div class="chat-header-info">
       <span class="chat-title">F.R.I.D.A.Y <em>AI</em></span>
-      <span class="chat-sub">Personal Assistant · Always on</span>
+      <span class="chat-sub">Personal Assistant</span>
     </div>
-    <button class="chat-close" onclick="fridayToggle()">✕</button>
+    <button class="chat-close" aria-label="Close chat" onclick="fridayToggle()">✕</button>
   </div>
-  <div class="chat-messages" id="chat-messages">
+  <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
     <div class="msg msg-friday">
       <div class="msg-sender">F.R.I.D.A.Y</div>
       Hello — I'm F.R.I.D.A.Y, Eyamin's personal assistant. Ask me about his work, skills, or how to reach him.
@@ -1906,7 +1898,7 @@ function toggleTheme() {
     <div class="typing-dots"><span></span><span></span><span></span></div>
   </div>
   <div class="chat-input-row">
-    <input type="text" id="chat-input" placeholder="Ask something…" onkeydown="if(event.key==='Enter')fridaySend()">
+    <input type="text" id="chat-input" aria-label="Message F.R.I.D.A.Y" placeholder="Ask something…" onkeydown="if(event.key==='Enter')fridaySend()">
     <button class="chat-send" id="chat-send-btn" onclick="fridaySend()">Send</button>
   </div>
 </div>
@@ -1920,7 +1912,8 @@ let fridayOpen = false;
 function fridayToggle() {
   fridayOpen = !fridayOpen;
   document.getElementById("friday-panel").classList.toggle("open", fridayOpen);
-  if (fridayOpen) document.getElementById("chat-input").focus();
+  document.getElementById("friday-btn").setAttribute("aria-expanded", String(fridayOpen));
+  document.getElementById(fridayOpen ? "chat-input" : "friday-btn").focus();
 }
 
 function fridayAppend(role, text) {
@@ -1928,7 +1921,9 @@ function fridayAppend(role, text) {
   const div = document.createElement("div");
   if (role === "friday") {
     div.className = "msg msg-friday";
-    div.innerHTML = '<div class="msg-sender">F.R.I.D.A.Y</div>' + text;
+    const sender = document.createElement('div');
+    sender.className = 'msg-sender'; sender.textContent = 'F.R.I.D.A.Y';
+    div.append(sender, document.createTextNode(String(text)));
   } else {
     div.className = "msg msg-user";
     div.textContent = text;
@@ -1941,7 +1936,7 @@ async function fridaySend() {
   const input = document.getElementById("chat-input");
   const btn   = document.getElementById("chat-send-btn");
   const text  = input.value.trim();
-  if (!text) return;
+  if (!text || btn.disabled) return;
   input.value = "";
   fridayAppend("user", text);
   fridayHistory.push({ role: "user", content: text });
@@ -1950,7 +1945,8 @@ async function fridaySend() {
   btn.disabled = true;
   document.getElementById("chat-messages").scrollTop = 9999;
   try {
-    const res  = await fetch(FRIDAY_API, { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({messages: fridayHistory}) });
+    const res  = await fetch(FRIDAY_API, { method:"POST", signal:AbortSignal.timeout(15000), headers:{"Content-Type":"application/json"}, body:JSON.stringify({messages: fridayHistory}) });
+    if (!res.ok) throw new Error("Unavailable");
     const json = await res.json();
     const reply = json.ok ? json.reply : "I'm having a little trouble connecting right now. Try again shortly.";
     fridayHistory.push({ role:"assistant", content:reply });
@@ -1958,7 +1954,7 @@ async function fridaySend() {
     fridayAppend("friday", reply);
   } catch(e) {
     typing.style.display = "none";
-    fridayAppend("friday", "Connection error — please try again in a moment.");
+    fridayAppend("friday", "I can’t connect right now. Please try again later, or email Eyamin at eyaminevnaypayel@gmail.com.");
   } finally {
     btn.disabled = false;
     input.focus();
@@ -1966,5 +1962,118 @@ async function fridaySend() {
 }
 </script>
 
+<style>
+/* Archive refinement: readable type, deliberate spacing, accessible controls. */
+:root { --serif: var(--display); }
+body { cursor:auto; }
+body::before { opacity:.07; }
+#cursor,#cursor-ring { display:none; }
+a,button,input { -webkit-tap-highlight-color:transparent; }
+:focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+section[id] { scroll-margin-top:100px; }
+.skip-link { position:fixed; top:10px; left:16px; transform:translateY(-160%); z-index:10001; padding:14px 20px; background:var(--ink); color:var(--paper); }
+.skip-link:focus { transform:none; }
+.masthead { grid-template-columns:1fr auto; padding:12px clamp(20px,4vw,64px); }
+.masthead-left { display:none; }
+.masthead-center { text-align:left; font-size:1.125rem; }
+.masthead-right { gap:clamp(14px,2vw,30px); font-size:.875rem; letter-spacing:.02em; }
+.masthead-right a { min-height:44px; display:flex; align-items:center; }
+.theme-toggle { width:44px; height:44px; font-size:1.1rem; flex-shrink:0; }
+.hero { min-height:auto; padding:100px clamp(20px,4vw,64px) 48px; }
+.hero::before { display:none; }
+.hero-title { font-size:clamp(3.25rem,11.8vw,12rem); padding:32px 0; line-height:.98; }
+.hero-sub { font-size:.875rem; letter-spacing:.04em; }
+.hero-body { grid-template-columns:1.1fr 1fr 1fr; align-items:center; gap:clamp(24px,4vw,64px); padding:48px 0 24px; }
+.drop-cap { font-size:clamp(1.1rem,1.5vw,1.3rem); line-height:1.7; }
+.drop-cap::first-letter { float:none; font:inherit; color:inherit; margin:0; }
+.portrait-frame { max-width:340px; transform:rotate(-2deg); margin-bottom:30px; }
+.portrait-bg { padding:10px; box-shadow:12px 14px 0 var(--cream); }
+.hero-actions { display:flex; flex-wrap:wrap; gap:16px 24px; margin-top:28px; align-items:center; }
+.hero-actions a { color:var(--ink); font-family:var(--mono); font-size:.875rem; text-underline-offset:6px; padding:14px 0; }
+.hero-actions .primary-link { background:var(--accent); color:#fff; padding:16px 20px; text-decoration:none; }
+.hero-actions a span { margin-left:10px; }
+.col-label,.work-num,.work-tag,.section-meta,.meta-item,.stack-row,.photo-caption,.colophon,.issue-bar,.dossier-stamp,.dossier-card-title,.doc-stamp,.meta-quote-attr { font-size:.75rem; letter-spacing:.06em; }
+.meta-item { gap:12px; flex-wrap:wrap; }
+.meta-item .val { text-align:right; }
+section { padding:80px clamp(20px,4vw,64px); }
+.works-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.work-item { padding:clamp(24px,3vw,44px); min-width:0; min-height:440px; border-bottom:1px solid var(--ink); }
+.work-item:nth-child(2n) { border-right:0; }
+.work-item:first-child { background:var(--cream); }
+.work-item-featured { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.3fr) minmax(0,1fr); border-bottom:0; }
+.work-item-featured-stack { grid-template-columns:1fr; }
+.stack-row { justify-content:space-between; flex-wrap:wrap; }
+.work-title { font-size:clamp(1.7rem,3vw,2.5rem); line-height:1.12; }
+.work-desc,.work-item-featured .work-desc { font-size:1rem; line-height:1.75; max-width:55ch; }
+.work-tags { gap:10px 16px; margin-top:auto; }
+.work-visual { min-height:180px; }
+.work-item::before { display:none; }
+.work-item:hover * { color:inherit !important; }
+.work-item:hover .work-desc { color:var(--muted) !important; }
+.work-item:hover .work-num { color:var(--accent) !important; }
+.work-item:hover .work-visual { filter:none; }
+.work-item:hover .btn-download { color:var(--paper) !important; }
+.work-item-featured:hover .stack-val { color:var(--ink); }
+.photo-caption { opacity:1; transform:none; color:#fff; background:rgba(0,0,0,.65); padding:10px 12px; left:12px; right:12px; bottom:12px; }
+.rv { opacity:1; transform:none; }
+.resume-card { gap:20px; }
+.btn-download { font-size:.875rem; letter-spacing:.04em; padding:16px 22px; }
+.corr-link { font-size:.875rem; letter-spacing:.05em; }
+#friday-panel { width:min(400px,calc(100vw - 32px)); max-height:min(600px,calc(100dvh - 120px)); right:16px; bottom:84px; }
+#friday-btn { right:20px; bottom:20px; }
+#chat-input { min-width:0; font-size:1rem; }
+.msg { font-size:1rem; overflow-wrap:anywhere; }
+.msg-user { font-size:.875rem; }
+.chat-sub,.msg-sender { font-size:.75rem; letter-spacing:.04em; }
+.chat-close { min-width:44px; min-height:44px; }
+.chat-messages { min-height:0; }
+@media (max-width:1000px) {
+ .hero-body { grid-template-columns:1fr 1fr; }
+ .hero-col:last-child { grid-column:1/-1; }
+ .meta-list { display:grid; grid-template-columns:1fr 1fr; gap:0 32px; }
+ .work-item-featured { grid-template-columns:1fr 1.5fr; }
+ .work-item-featured-meta { grid-column:1/-1; }
+ .work-item-featured-stack { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:600px) {
+ .masthead { grid-template-columns:1fr; gap:4px; padding:10px 20px 6px; }
+ .masthead-center { text-align:center; font-size:1rem; }
+ .masthead-right { justify-content:space-between; gap:8px; font-size:.75rem; }
+ .theme-toggle { width:40px; height:40px; }
+ .hero { padding-top:112px; }
+ .issue-bar { font-size:.75rem; letter-spacing:0; }
+ .issue-bar-center { display:none; }
+ .hero-title { font-size:clamp(3rem,15.5vw,5.8rem); text-align:left; line-height:.94; padding:28px 0; }
+ .hero-title .word-1 { display:block; }
+ .hero-sub { grid-template-columns:1fr 1fr; gap:10px; font-size:.75rem; }
+ .hero-sub-center { grid-column:1/-1; grid-row:2; font-size:1.125rem; white-space:normal; }
+ .hero-body { grid-template-columns:1fr; gap:32px; padding-top:32px; }
+ .hero-col:last-child { grid-column:auto; }
+ .portrait-frame { max-width:300px; }
+ .meta-list { grid-template-columns:1fr; }
+ section { padding-top:56px; padding-bottom:56px; }
+ section[id] { scroll-margin-top:112px; }
+ .works-grid { grid-template-columns:1fr; }
+ .work-item { min-height:0; border-right:0; }
+ .work-item-featured { grid-template-columns:1fr; }
+ .work-item-featured-stack { grid-template-columns:1fr; }
+ .work-item-featured-meta { grid-column:auto; }
+ .work-visual { min-height:140px; }
+ .instruments-grid { grid-template-columns:1fr 1fr; }
+ .instrument { padding:20px 12px; min-width:0; }
+ .resume-card { padding:20px; grid-template-columns:1fr; }
+ .resume-icon { display:none; }
+ .resume-info-title { overflow-wrap:anywhere; }
+ .corr-link { padding:14px 18px; }
+ .colophon { padding-bottom:90px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ html { scroll-behavior:auto; }
+ *,*::before,*::after { animation:none !important; transition:none !important; }
+ .hero-title span,.hero-col,.rv { opacity:1 !important; transform:none !important; filter:none !important; }
+}
+</style>
+<script>document.addEventListener('keydown', event => { if (event.key === 'Escape' && fridayOpen) fridayToggle(); });</script>
 </body>
 </html>
+
