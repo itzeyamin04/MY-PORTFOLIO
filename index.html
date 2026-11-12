@@ -1,0 +1,3678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="favicon-monogram.svg">
+<link rel="apple-touch-icon" href="favicon-monogram.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eyamin Evnay Payel — Archive N°01</title>
+<meta name="description" content="The personal archive of Eyamin Evnay Payel — developer, photographer, and CIS student at BMCC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+(() => {
+  let d = matchMedia('(prefers-color-scheme: dark)').matches;
+  try { const s = localStorage.getItem('payel-theme'); if (s) d = s === 'dark'; } catch {}
+  document.documentElement.setAttribute('data-theme', d ? 'dark' : '');
+})();
+</script>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   TOKENS & THEME
+   ═══════════════════════════════════════════════════════════════ */
+:root {
+  --ink: #1a1511;
+  --paper: #f3ede2;
+  --cream: #e8dfcf;
+  --surface: #fbf8f2;
+  --accent: #c73e1d;
+  --accent-btn: #c73e1d;
+  --accent2: #1c4b82;
+  --gold: #9a7632;
+  --muted: #61584b;
+  --line: rgba(26, 21, 17, 0.16);
+  --shadow-3d: rgba(26, 21, 17, 0.18);
+
+  --dark-surface: #14100c;
+  --dark-surface-2: #1d1712;
+  --dark-ink: #f3ede2;
+  --dark-muted: rgba(243, 237, 226, 0.72);
+  --dark-line: rgba(243, 237, 226, 0.18);
+
+  --display: 'Fraunces', 'Times New Roman', serif;
+  --italic: 'Instrument Serif', Georgia, serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+[data-theme="dark"] {
+  --ink: #ede4d5;
+  --paper: #0d0b08;
+  --cream: #17130e;
+  --surface: #1e1812;
+  --accent: #e86a47;
+  --accent-btn: #c73e1d;
+  --accent2: #6ea0d9;
+  --gold: #d4af6a;
+  --muted: #9e9382;
+  --line: rgba(237, 228, 213, 0.16);
+  --shadow-3d: rgba(0, 0, 0, 0.55);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--display);
+  font-weight: 300;
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+body.theme-ready {
+  transition: background .4s ease, color .4s ease;
+}
+
+/* Archival paper grain */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 320 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .05; }
+
+a, button, input { -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+
+.skip-link {
+  position: fixed;
+  top: 10px; left: 16px;
+  transform: translateY(-180%);
+  z-index: 10001;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  text-decoration: none;
+}
+.skip-link:focus { transform: translateY(0); }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--paper); border-left: 1px solid var(--line); }
+::-webkit-scrollbar-thumb { background: var(--ink); }
+
+/* ═══════════════════════════════════════════════════════════════
+   MASTHEAD & SCROLL DEPTH BAR
+   ═══════════════════════════════════════════════════════════════ */
+.masthead {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.75rem clamp(18px, 4vw, 56px);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.scroll-progress {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: transparent;
+  pointer-events: none;
+}
+.scroll-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+.masthead-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.masthead-left .dot {
+  color: var(--accent);
+  animation: pulseDot 2.4s ease-in-out infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.masthead-section-tag {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.masthead-center {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+}
+.masthead-center em {
+  font-family: var(--italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.masthead-right {
+  display: flex;
+  gap: clamp(12px, 1.8vw, 26px);
+  justify-content: flex-end;
+  align-items: center;
+}
+.masthead-right a {
+  color: var(--muted);
+  text-decoration: none;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  transition: color .25s;
+}
+.masthead-right a::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 6px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.masthead-right a:hover,
+.masthead-right a.active {
+  color: var(--ink);
+}
+.masthead-right a.active::after,
+.masthead-right a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.theme-toggle {
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .25s;
+}
+.theme-toggle:hover { transform: rotate(180deg) scale(1.06); }
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO + 3D SPATIAL RIG
+   ═══════════════════════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  padding: 82px clamp(18px, 4vw, 56px) 38px;
+  overflow: hidden;
+  perspective: 1400px;
+}
+
+#hero-3d-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > *:not(#hero-3d-canvas) {
+  position: relative;
+  z-index: 2;
+}
+
+.issue-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  gap: 1rem;
+}
+
+.issue-bar-center {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--accent);
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.65rem, 8.1vw, 8.1rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+  padding: 20px 0 18px;
+  text-align: center;
+  transform-style: preserve-3d;
+}
+
+.hero-title span {
+  display: inline-block;
+  animation: title3dIn .45s cubic-bezier(.22, 1, .36, 1) both;
+}
+.hero-title .word-1 { animation-delay: 0s; }
+.hero-title .word-2 {
+  animation-delay: .04s;
+  font-family: var(--italic);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+  font-size: 0.96em;
+}
+.hero-title .word-3 { animation-delay: .08s; }
+
+@keyframes title3dIn {
+  from {
+    transform: perspective(900px) translateY(16px) rotateX(12deg);
+  }
+  to {
+    transform: perspective(900px) translateY(0) rotateX(0deg);
+  }
+}
+
+.hero-sub {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  gap: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.hero-sub-center {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.hero-sub-right { text-align: right; color: var(--muted); }
+
+.hero-body {
+  display: grid;
+  grid-template-columns: 1.08fr 1fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  padding: 34px 0 18px;
+}
+
+.hero-col {
+  animation: colIn 0.45s cubic-bezier(.22, 1, .36, 1) both;
+}
+.hero-col:nth-child(2) { animation-delay: .05s; }
+.hero-col:nth-child(3) { animation-delay: .1s; }
+
+@keyframes colIn {
+  from { transform: translateY(14px); }
+  to { transform: translateY(0); }
+}
+
+.col-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+}
+
+.drop-cap {
+  font-size: clamp(1.06rem, 1.35vw, 1.24rem);
+  line-height: 1.72;
+  font-weight: 300;
+  color: var(--ink);
+}
+.drop-cap::first-letter {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 3.6em;
+  line-height: 0.82;
+  float: left;
+  margin: 0.06em 0.14em 0 0;
+  color: var(--accent);
+  font-weight: 400;
+}
+.drop-cap em {
+  font-family: var(--italic);
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  margin-top: 28px;
+  align-items: center;
+}
+.hero-actions a {
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-underline-offset: 6px;
+  padding: 12px 0;
+  transition: color .25s, transform .25s;
+}
+.hero-actions a:hover { color: var(--accent); transform: translateY(-2px); }
+.hero-actions .primary-link {
+  background: var(--accent-btn);
+  color: #fff;
+  padding: 14px 20px;
+  text-decoration: none;
+  border: 1px solid var(--accent-btn);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.hero-actions .primary-link:hover {
+  color: #fff;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.hero-actions a span { margin-left: 8px; }
+
+/* 3D Interactive Portrait Plate */
+.portrait-stage {
+  perspective: 1100px;
+  padding: 12px 0 38px;
+  display: flex;
+  justify-content: center;
+}
+
+.portrait-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  max-width: 330px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotateZ(-1.5deg);
+  transition: transform .18s ease-out;
+}
+
+.portrait-shadow-plate {
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  border: 1px solid var(--ink);
+  transform: translate3d(14px, 16px, -28px);
+  pointer-events: none;
+}
+
+.portrait-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  padding: 10px;
+  transform: translateZ(0px);
+  box-shadow: 0 24px 48px var(--shadow-3d);
+}
+
+.portrait-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-surface);
+  overflow: hidden;
+  transform: translateZ(8px);
+}
+
+.portrait-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+}
+.portrait-frame:hover .portrait-inner img {
+  transform: scale(1.04);
+}
+
+/* Specular glare across glass */
+.portrait-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 35%), rgba(255, 255, 255, 0.24), transparent 58%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity .3s;
+  transform: translateZ(20px);
+}
+.portrait-frame:hover .portrait-glare { opacity: 1; }
+
+.portrait-corner {
+  position: absolute;
+  color: var(--accent);
+  font-size: 0.95rem;
+  z-index: 4;
+  pointer-events: none;
+  transform: translateZ(34px);
+}
+.portrait-corner.tl { top: -0.65rem; left: -0.65rem; }
+.portrait-corner.br { bottom: -0.65rem; right: -0.65rem; }
+
+.portrait-caption {
+  position: absolute;
+  bottom: -2.4rem;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--muted);
+  transform: translateZ(28px);
+  pointer-events: none;
+}
+.portrait-caption::before { content: '— '; color: var(--accent); }
+.portrait-caption::after { content: ' —'; color: var(--accent); }
+
+/* Right column metadata */
+.meta-list { font-size: 0.9rem; }
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0.72rem 0;
+  border-bottom: 1px dotted var(--line);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.meta-item .key { color: var(--muted); }
+.meta-item .val { color: var(--ink); font-weight: 500; text-align: right; }
+
+.meta-quote {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  margin-top: 1.5rem;
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: 1rem;
+}
+.meta-quote-attr {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.55rem;
+  padding-left: 1rem;
+}
+
+/* Marquee */
+.hero-marquee {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  overflow: hidden;
+  padding: 0.85rem 0;
+  white-space: nowrap;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+}
+.hero-marquee-inner {
+  display: inline-block;
+  animation: marquee 32s linear infinite;
+}
+.hero-marquee:hover .hero-marquee-inner { animation-play-state: paused; }
+.hero-marquee-inner em { font-family: var(--italic); font-style: italic; color: var(--accent); font-weight: 400; }
+.hero-marquee-inner .sep { display: inline-block; margin: 0 1.4rem; color: var(--accent); }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SHARED SECTION STYLING & SCROLL REVEAL
+   ═══════════════════════════════════════════════════════════════ */
+section {
+  padding: clamp(64px, 7vw, 96px) clamp(18px, 4vw, 56px);
+  position: relative;
+}
+section[id] { scroll-margin-top: 84px; }
+
+.section-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 2.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--ink);
+}
+.section-num {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding-bottom: 0.3rem;
+}
+.section-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+.section-title em {
+  font-family: var(--italic);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+}
+.section-meta {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
+
+.rv {
+  opacity: 0;
+  transform: perspective(1000px) translateY(32px) rotateX(6deg);
+  transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+.rv.in {
+  opacity: 1;
+  transform: perspective(1000px) translateY(0) rotateX(0deg);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   WORKS / 3D PROJECT CARDS
+   ═══════════════════════════════════════════════════════════════ */
+#works { background: var(--paper); }
+
+.works-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.filter-pill {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 0.55rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.filter-pill:hover { border-color: var(--ink); color: var(--ink); }
+.filter-pill.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.works-hint {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.work-item {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  padding: clamp(24px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 430px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .2s ease-out, box-shadow .3s ease, border-color .3s ease;
+}
+.work-item.is-hidden { display: none; }
+
+.work-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--accent) 11%, transparent), transparent 65%);
+  opacity: 0;
+  transition: opacity .35s;
+}
+.work-item:hover {
+  box-shadow: 10px 14px 0 var(--ink);
+}
+.work-item:hover::after { opacity: 1; }
+
+.work-item-flagship {
+  background: var(--cream);
+}
+
+.work-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transform: translateZ(16px);
+}
+
+.work-num {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.work-inspect {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 0.28rem 0.6rem;
+  transition: all .25s;
+}
+.work-item:hover .work-inspect {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.work-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 185px;
+  padding: 0.5rem 0;
+  transform: translateZ(26px);
+}
+.work-visual svg {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+#friday-3d-canvas {
+  width: 100%;
+  max-width: 260px;
+  height: 180px;
+  display: block;
+}
+
+.work-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 2.8vw, 2.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  transform: translateZ(20px);
+}
+.work-title em {
+  font-family: var(--italic);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--accent);
+}
+
+.work-desc {
+  font-size: 0.98rem;
+  line-height: 1.68;
+  color: var(--muted);
+  max-width: 54ch;
+  transform: translateZ(12px);
+}
+
+.work-tags {
+  display: flex;
+  gap: 8px 14px;
+  flex-wrap: wrap;
+  padding-top: 0.85rem;
+  margin-top: auto;
+  border-top: 1px dotted var(--line);
+  transform: translateZ(14px);
+}
+.work-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.work-tag::before { content: '● '; color: var(--accent); font-size: 0.55rem; }
+
+/* Featured Yaqeen 3D Phone Card */
+.work-item-featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(24px, 3vw, 44px);
+  align-items: center;
+  min-height: 360px;
+}
+
+.phone-3d-stage {
+  perspective: 950px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  transform: translateZ(28px);
+}
+
+.phone-3d-device {
+  width: 170px;
+  height: 310px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #241e18, #0f0c09);
+  border: 2px solid #b08d47;
+  padding: 10px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(-14deg) rotateX(8deg);
+  box-shadow:
+    10px 16px 0 rgba(26, 21, 17, 0.35),
+    0 24px 40px rgba(0, 0, 0, 0.28);
+  transition: transform .45s cubic-bezier(.22, 1, .36, 1), box-shadow .45s;
+}
+.work-item-featured:hover .phone-3d-device {
+  transform: rotateY(-4deg) rotateX(3deg) translateZ(16px);
+  box-shadow:
+    6px 22px 0 rgba(26, 21, 17, 0.25),
+    0 32px 52px rgba(0, 0, 0, 0.34);
+}
+
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: radial-gradient(circle at 50% 24%, #251d14, #0d0a07 75%);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: #f3ede2;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(212, 175, 106, 0.25);
+}
+
+.phone-notch {
+  width: 44px;
+  height: 5px;
+  border-radius: 99px;
+  background: rgba(243, 237, 226, 0.22);
+}
+
+.phone-ring-wrap {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(12px);
+}
+
+.phone-ring-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.phone-ring-arc {
+  stroke-dasharray: 252;
+  stroke-dashoffset: 68;
+  animation: yaqeenPulse 4.5s ease-in-out infinite alternate;
+}
+@keyframes yaqeenPulse {
+  from { stroke-dashoffset: 84; }
+  to { stroke-dashoffset: 42; }
+}
+
+.phone-ring-label {
+  position: absolute;
+  text-align: center;
+}
+.phone-ring-label .prayer-name {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d4af6a;
+}
+.phone-ring-label .prayer-time {
+  display: block;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.phone-rows {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.phone-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+}
+.phone-row .check { color: #d4af6a; }
+
+.work-item-featured-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transform: translateZ(16px);
+}
+.work-item-featured-stack {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.stack-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dotted var(--line);
+}
+.stack-key { color: var(--muted); }
+.stack-val { color: var(--ink); font-weight: 500; }
+
+.work-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DOSSIER / HOLOGRAPHIC SUBJECT CARD
+   ═══════════════════════════════════════════════════════════════ */
+#dossier { background: var(--cream); }
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+
+.dossier-card-stage {
+  perspective: 900px;
+  position: sticky;
+  top: 6rem;
+}
+
+.dossier-card {
+  position: relative;
+  border: 1px solid var(--ink);
+  padding: 1.75rem;
+  background: var(--surface);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .2s ease-out, box-shadow .3s ease;
+  box-shadow: 8px 10px 0 var(--ink);
+}
+.dossier-card::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 120deg at var(--mx, 50%) var(--my, 50%),
+    transparent 0deg,
+    rgba(212, 175, 106, 0.22) 60deg,
+    rgba(199, 62, 29, 0.16) 130deg,
+    transparent 210deg
+  );
+  opacity: 0;
+  transition: opacity .35s;
+}
+.dossier-card:hover::after { opacity: 1; }
+
+.dossier-card-title {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 1rem;
+  transform: translateZ(16px);
+}
+.dossier-id {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.45rem;
+  line-height: 1.05;
+  margin-bottom: 0.3rem;
+  transform: translateZ(20px);
+}
+.dossier-id em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--accent); }
+.dossier-role {
+  font-family: var(--italic);
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 1.4rem;
+  font-size: 1rem;
+  transform: translateZ(14px);
+}
+.dossier-stamp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  transform: translateZ(12px);
+}
+.dossier-stamp-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dotted var(--line);
+}
+.dossier-stamp-row .k { color: var(--muted); }
+.dossier-mark {
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--accent);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transform: translateZ(26px) rotate(-3deg);
+  display: inline-block;
+}
+
+.dossier-content h3 {
+  font-family: var(--italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.85rem, 3vw, 2.4rem);
+  line-height: 1.12;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.dossier-content p {
+  font-size: 1.04rem;
+  line-height: 1.78;
+  margin-bottom: 1.2rem;
+  color: var(--ink);
+  max-width: 64ch;
+}
+.dossier-content p em {
+  font-family: var(--italic);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1.05em;
+}
+.pull-quote {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.22;
+  color: var(--accent);
+  padding: 1.8rem 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  margin: 2rem 0;
+  max-width: 34ch;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INSTRUMENTS / CAPABILITIES
+   ═══════════════════════════════════════════════════════════════ */
+#instruments { background: var(--paper); }
+
+.instruments-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.instrument {
+  background: var(--surface);
+  border: 1px solid var(--ink);
+  padding: 1.6rem 1.35rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .2s ease-out, box-shadow .3s ease, background .3s ease, color .3s ease;
+}
+.instrument:hover {
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+  box-shadow: 6px 8px 0 var(--accent);
+}
+.instrument:hover .instrument-cat,
+.instrument:hover .instrument-num { color: var(--dark-muted); }
+
+.instrument-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  transform: translateZ(12px);
+}
+.instrument-glyph {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 1.35rem;
+  color: var(--accent);
+  transform: translateZ(20px);
+}
+.instrument-name {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.45rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  transform: translateZ(18px);
+}
+.instrument-name em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--accent); }
+.instrument-cat {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+.instrument-tier {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px dotted var(--line);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transform: translateZ(14px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GALLERY / DARKROOM 3D PLATES + LIGHTBOX
+   ═══════════════════════════════════════════════════════════════ */
+#gallery {
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+  position: relative;
+  overflow: hidden;
+}
+#gallery .section-head { border-bottom-color: var(--dark-ink); }
+#gallery .section-title { color: var(--dark-ink); }
+#gallery .section-meta { color: var(--dark-muted); }
+
+.gallery-intro {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.45;
+  color: var(--dark-muted);
+  max-width: 650px;
+  margin-bottom: 2.5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 94px;
+  gap: 14px;
+}
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark-surface-2);
+  border: 1px solid var(--dark-line);
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transform-style: preserve-3d;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .22s ease-out, border-color .3s ease, box-shadow .3s ease;
+}
+.photo:hover {
+  border-color: var(--accent);
+  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.55);
+  z-index: 3;
+}
+
+.photo-visual {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.photo-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.photo:hover .photo-visual img { transform: scale(1.06); }
+
+.photo-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.2rem;
+  background: radial-gradient(circle at 30% 25%, #2a2118, #120e0a 80%);
+  color: var(--dark-ink);
+}
+.photo-fallback-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.photo-fallback-art {
+  align-self: center;
+  opacity: 0.72;
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(13, 11, 8, 0.76);
+  backdrop-filter: blur(8px);
+  padding: 10px 12px;
+  border-left: 2px solid var(--accent);
+  transform: translateZ(20px);
+}
+
+.photo-1 { grid-column: 1 / 4; grid-row: 1 / 5; }
+.photo-2 { grid-column: 4 / 7; grid-row: 1 / 3; }
+.photo-3 { grid-column: 4 / 7; grid-row: 3 / 5; }
+.photo-4 { grid-column: 1 / 3; grid-row: 5 / 7; }
+.photo-5 { grid-column: 3 / 5; grid-row: 5 / 9; }
+.photo-6 { grid-column: 5 / 7; grid-row: 5 / 9; }
+.photo-7 { grid-column: 1 / 3; grid-row: 7 / 9; }
+
+.gallery-note {
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--dark-line);
+  font-family: var(--italic);
+  font-style: italic;
+  color: var(--dark-muted);
+  font-size: 0.98rem;
+  text-align: center;
+}
+.gallery-note em {
+  color: var(--accent);
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESUME / DOCUMENT
+   ═══════════════════════════════════════════════════════════════ */
+#document { background: var(--paper); text-align: center; }
+
+.doc-wrapper { max-width: 740px; margin: 0 auto; }
+
+.doc-stamp {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+  padding: 0.45rem 1.1rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+.doc-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.doc-title em { font-family: var(--italic); font-style: italic; font-weight: 400; color: var(--accent); }
+.doc-sub {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 1.18rem;
+  color: var(--muted);
+  margin: 0 auto 2.3rem;
+  max-width: 520px;
+}
+
+.resume-card {
+  background: var(--cream);
+  border: 1px solid var(--ink);
+  padding: 2rem;
+  margin-bottom: 1.6rem;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  box-shadow: 8px 10px 0 var(--ink);
+}
+.resume-icon {
+  width: 58px;
+  height: 70px;
+  border: 2px solid var(--ink);
+  position: relative;
+  background: var(--surface);
+}
+.resume-icon::before {
+  content: '';
+  position: absolute;
+  top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 68%;
+  height: 2px;
+  background: var(--ink);
+  box-shadow: 0 8px 0 var(--ink), 0 16px 0 var(--ink), 0 24px 0 var(--accent), 0 32px 0 var(--ink), 0 40px 0 var(--ink);
+}
+.resume-info-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.resume-info-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.2rem;
+}
+.resume-info-meta {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.resume-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn-download,
+.btn-secondary {
+  border: 1px solid var(--ink);
+  padding: 0.95rem 1.45rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  transition: transform .25s, background .25s, color .25s, border-color .25s;
+}
+.btn-download {
+  background: var(--ink);
+  color: var(--paper);
+}
+.btn-download:hover {
+  background: var(--accent-btn);
+  border-color: var(--accent-btn);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  background: var(--surface);
+  color: var(--ink);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CORRESPONDENCE & COLOPHON
+   ═══════════════════════════════════════════════════════════════ */
+#correspondence {
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+  padding: clamp(72px, 8vw, 110px) clamp(18px, 4vw, 56px);
+  position: relative;
+  overflow: hidden;
+}
+
+.corr-star {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vmin;
+  height: 75vmin;
+  opacity: 0.05;
+  pointer-events: none;
+  animation: slowRotate 60s linear infinite;
+}
+.corr-star::before {
+  content: '✦';
+  font-family: var(--display);
+  font-size: 75vmin;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  text-align: center;
+}
+@keyframes slowRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.corr-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.corr-label {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.6rem;
+}
+.corr-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--dark-ink);
+  margin-bottom: 1.8rem;
+}
+.corr-title em {
+  font-family: var(--italic);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.corr-sub {
+  font-family: var(--italic);
+  font-style: italic;
+  font-size: 1.32rem;
+  color: var(--dark-muted);
+  margin: 0 auto 2.8rem;
+  line-height: 1.5;
+  max-width: 560px;
+}
+.corr-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.corr-link {
+  padding: 0.95rem 1.65rem;
+  border: 1px solid var(--dark-line);
+  color: var(--dark-ink);
+  text-decoration: none;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: all .25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.corr-link:hover {
+  background: var(--accent-btn);
+  border-color: var(--accent-btn);
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+.colophon {
+  background: var(--paper);
+  border-top: 1px solid var(--ink);
+  padding: 2rem clamp(18px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.colophon-center { text-align: center; }
+.colophon-right { text-align: right; }
+.colophon em { font-family: var(--italic); font-style: italic; color: var(--accent); text-transform: none; letter-spacing: 0.01em; }
+.colophon a { color: var(--accent); text-decoration: none; }
+
+/* ═══════════════════════════════════════════════════════════════
+   MODALS (PROJECT CASE STUDY, LIGHTBOX, INTERACTIVE CV)
+   ═══════════════════════════════════════════════════════════════ */
+.archive-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(13, 11, 8, 0.82);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 40px);
+}
+.archive-modal.open { display: flex; }
+
+.modal-card {
+  width: min(760px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 14px 18px 0 rgba(0, 0, 0, 0.45);
+  padding: clamp(24px, 4vw, 44px);
+  position: relative;
+  animation: modal3dPop .28s cubic-bezier(.22, 1, .36, 1);
+}
+@keyframes modal3dPop {
+  from { opacity: 0; transform: perspective(900px) translateY(20px) rotateX(6deg) scale(0.97); }
+  to { opacity: 1; transform: perspective(900px) translateY(0) rotateX(0) scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px; right: 16px;
+  width: 40px; height: 40px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+.modal-kicker {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.7rem;
+}
+.modal-title {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.modal-summary {
+  font-size: 1.04rem;
+  line-height: 1.7;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+.modal-block h4 {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.55rem;
+}
+.modal-block ul {
+  padding-left: 1.1rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* Gallery Lightbox */
+.lightbox-card {
+  width: min(920px, 100%);
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+  border: 1px solid var(--dark-line);
+  padding: clamp(18px, 3vw, 32px);
+  position: relative;
+  animation: modal3dPop .28s cubic-bezier(.22, 1, .36, 1);
+}
+.lightbox-stage {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  background: #090705;
+  border: 1px solid var(--dark-line);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.lightbox-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.lightbox-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.lightbox-nav {
+  display: flex;
+  gap: 0.6rem;
+}
+.lightbox-nav button {
+  background: var(--dark-surface-2);
+  color: var(--dark-ink);
+  border: 1px solid var(--dark-line);
+  padding: 0.6rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+.lightbox-nav button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* CV Modal print friendly */
+.cv-section { margin-bottom: 1.25rem; }
+.cv-section h4 {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+.cv-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.45rem;
+  font-size: 0.96rem;
+}
+.cv-row strong { font-weight: 600; }
+.cv-row span { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+
+/* ═══════════════════════════════════════════════════════════════
+   F.R.I.D.A.Y CHAT WIDGET
+   ═══════════════════════════════════════════════════════════════ */
+#friday-btn {
+  position: fixed;
+  bottom: 22px; right: 22px;
+  z-index: 1000;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--ink);
+  border: 2px solid var(--accent);
+  color: var(--paper);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  transition: transform .3s, background .3s;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+#friday-btn::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  animation: orbitalRing 4s linear infinite;
+}
+@keyframes orbitalRing {
+  0% { transform: scale(0.95) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.12) rotate(180deg); opacity: 0.2; }
+  100% { transform: scale(0.95) rotate(360deg); opacity: 0.8; }
+}
+#friday-btn:hover { background: var(--accent-btn); color: #fff; transform: scale(1.08); }
+
+.friday-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0.38rem 0.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+  text-transform: uppercase;
+}
+#friday-btn:hover .friday-tooltip { opacity: 1; }
+
+#friday-panel {
+  position: fixed;
+  bottom: 90px; right: 22px;
+  z-index: 1000;
+  width: min(400px, calc(100vw - 32px));
+  max-height: min(600px, calc(100dvh - 120px));
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  display: none;
+  flex-direction: column;
+  box-shadow: 10px 14px 36px rgba(0, 0, 0, 0.28);
+  animation: chatSlideUp .25s cubic-bezier(.22, 1, .36, 1);
+}
+#friday-panel.open { display: flex; }
+@keyframes chatSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-header {
+  background: var(--dark-surface);
+  color: var(--dark-ink);
+  padding: 0.9rem 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--accent);
+}
+.chat-title { font-family: var(--display); font-weight: 900; font-size: 1rem; }
+.chat-title em { font-family: var(--italic); color: var(--accent); font-weight: 400; font-style: italic; }
+.chat-sub {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dark-muted);
+}
+.chat-close {
+  background: none;
+  border: none;
+  color: var(--dark-ink);
+  font-size: 1.1rem;
+  cursor: pointer;
+  min-width: 40px; min-height: 40px;
+}
+
+.chat-messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 330px;
+}
+.msg {
+  max-width: 88%;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  padding: 0.65rem 0.9rem;
+  overflow-wrap: anywhere;
+}
+.msg-friday {
+  align-self: flex-start;
+  background: var(--cream);
+  border-left: 2px solid var(--accent);
+}
+.msg-sender {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.28rem;
+}
+.msg-user {
+  align-self: flex-end;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+}
+
+.chat-prompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0 1rem 0.75rem;
+}
+.chat-chip {
+  background: var(--cream);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.35rem 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.chat-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+.chat-typing {
+  align-self: flex-start;
+  background: var(--cream);
+  border-left: 2px solid var(--accent);
+  padding: 0.6rem 0.85rem;
+  margin: 0 1rem 0.6rem;
+  display: none;
+}
+.typing-dots { display: flex; gap: 0.3rem; align-items: center; }
+.typing-dots span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: tdot 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: .2s; }
+.typing-dots span:nth-child(3) { animation-delay: .4s; }
+@keyframes tdot { 0%, 80%, 100% { opacity: .2; } 40% { opacity: 1; } }
+
+.chat-input-row {
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: stretch;
+}
+#chat-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  padding: 0.8rem 1rem;
+  font-family: var(--display);
+  font-size: 0.95rem;
+  outline: none;
+  background: var(--paper);
+  color: var(--ink);
+}
+.chat-send {
+  background: var(--accent-btn);
+  color: #fff;
+  border: none;
+  padding: 0 1.15rem;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.chat-send:disabled { background: var(--muted); cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .masthead-left { display: none; }
+  .masthead { grid-template-columns: 1fr auto; }
+  .masthead-center { text-align: left; }
+  .hero-body { grid-template-columns: 1fr 1fr; }
+  .hero-col:last-child { grid-column: 1 / -1; }
+  .meta-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .work-item-featured { grid-template-columns: 1fr 1.4fr; }
+  .work-item-featured-meta { grid-column: 1 / -1; }
+  .work-item-featured-stack { grid-template-columns: 1fr 1fr; gap: 0.45rem 1.8rem; }
+  .dossier-grid { grid-template-columns: 1fr; }
+  .dossier-card-stage { position: static; max-width: 380px; }
+  .instruments-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .modal-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 680px) {
+  .masthead { grid-template-columns: 1fr; gap: 4px; padding: 10px 18px 8px; }
+  .masthead-center { text-align: center; }
+  .masthead-right { justify-content: space-between; gap: 8px; font-size: 0.68rem; }
+  .hero { padding-top: 118px; }
+  .issue-bar-center { display: none; }
+  .hero-title { font-size: clamp(2.55rem, 12.8vw, 4.8rem); text-align: left; line-height: 0.93; }
+  .hero-title .word-1 { display: block; }
+  .hero-sub { grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.72rem; }
+  .hero-sub-center { grid-column: 1 / -1; grid-row: 2; white-space: normal; }
+  .hero-body { grid-template-columns: 1fr; gap: 32px; padding-top: 28px; }
+  .hero-col:last-child { grid-column: auto; }
+  .meta-list { grid-template-columns: 1fr; }
+  .section-head { grid-template-columns: 1fr; gap: 0.75rem; }
+  .section-num { writing-mode: horizontal-tb; transform: none; }
+  .section-meta { text-align: left; }
+  .works-grid { grid-template-columns: 1fr; }
+  .work-item { min-height: 0; }
+  .work-item-featured { grid-template-columns: 1fr; }
+  .work-item-featured-stack { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .photo-1, .photo-2, .photo-5 { grid-column: span 2; grid-row: auto; }
+  .photo-3, .photo-4, .photo-6, .photo-7 { grid-column: span 1; grid-row: auto; }
+  .resume-card { grid-template-columns: 1fr; }
+  .resume-icon { display: none; }
+  .colophon { grid-template-columns: 1fr; text-align: center; padding-bottom: 92px; }
+  .colophon-right { text-align: center; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   3D OPTICAL RETICLE CURSOR (DESKTOP FINE POINTER ONLY)
+   ═══════════════════════════════════════════════════════════════ */
+#cursor-dot,
+#cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 10002;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+#cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--paper);
+  transition: width .2s ease, height .2s ease, margin .2s ease, opacity .2s ease, background .2s ease;
+}
+
+#cursor-ring {
+  width: 42px;
+  height: 42px;
+  margin: -21px 0 0 -21px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--accent) 78%, var(--ink));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--paper) 35%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    width .28s cubic-bezier(.22, 1, .36, 1),
+    height .28s cubic-bezier(.22, 1, .36, 1),
+    margin .28s cubic-bezier(.22, 1, .36, 1),
+    background .25s ease,
+    border-color .25s ease,
+    opacity .22s ease;
+}
+
+/* Optical crosshair ticks on ring */
+#cursor-ring::before,
+#cursor-ring::after {
+  content: '';
+  position: absolute;
+  background: var(--accent);
+  opacity: 0.55;
+  transition: opacity .2s;
+}
+#cursor-ring::before { width: 1px; height: 6px; top: -4px; left: 50%; transform: translateX(-50%); }
+#cursor-ring::after { width: 6px; height: 1px; left: -4px; top: 50%; transform: translateY(-50%); }
+
+#cursor-label {
+  font-family: var(--mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity .18s ease, transform .18s ease;
+  white-space: nowrap;
+}
+
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor [role="button"] {
+  cursor: none;
+}
+body.has-custom-cursor input,
+body.has-custom-cursor textarea {
+  cursor: text;
+}
+
+body.has-custom-cursor.cursor-visible #cursor-dot,
+body.has-custom-cursor.cursor-visible #cursor-ring {
+  opacity: 1;
+}
+
+body.cursor-hover #cursor-dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+}
+body.cursor-hover #cursor-ring {
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+body.cursor-labeled #cursor-dot { opacity: 0 !important; }
+body.cursor-labeled #cursor-ring {
+  width: 68px;
+  height: 68px;
+  margin: -34px 0 0 -34px;
+  background: rgba(20, 16, 12, 0.76);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+body.cursor-labeled #cursor-ring::before,
+body.cursor-labeled #cursor-ring::after { opacity: 0.9; }
+body.cursor-labeled #cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+body.cursor-down #cursor-ring {
+  width: 32px;
+  height: 32px;
+  margin: -16px 0 0 -16px;
+}
+body.cursor-text #cursor-ring { opacity: 0.2 !important; }
+
+@media (hover: none), (pointer: coarse) {
+  #cursor-dot, #cursor-ring { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .hero-title span, .hero-col, .rv { opacity: 1 !important; transform: none !important; filter: none !important; }
+  #cursor-dot, #cursor-ring { display: none !important; }
+}
+
+@media print {
+  body > *:not(#cv-modal) { display: none !important; }
+  #cv-modal { position: static; background: none; padding: 0; display: block !important; }
+  .modal-card { box-shadow: none; border: none; max-height: none; width: 100%; }
+  .modal-close, .no-print { display: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#works">Skip to selected work</a>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"><span id="cursor-label"></span></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MASTHEAD                                -->
+<!-- ═══════════════════════════════════════ -->
+<header class="masthead">
+  <div class="masthead-left">
+    <span class="dot" aria-hidden="true">●</span>
+    <span>VOL. I · MMXXVI</span>
+    <span id="nyc-clock" aria-label="New York local time">NY --:--</span>
+    <span class="masthead-section-tag" id="active-section-label">§ 00 FRONT</span>
+  </div>
+
+  <a href="#top" class="masthead-center">The <em>Payel</em> Archive</a>
+
+  <nav class="masthead-right" aria-label="Primary navigation">
+    <a href="#works" data-nav="works">Works</a>
+    <a href="#dossier" data-nav="dossier">About</a>
+    <a href="#gallery" data-nav="gallery">Gallery</a>
+    <a href="#correspondence" data-nav="correspondence">Contact</a>
+    <button class="theme-toggle" id="theme-toggle-btn" title="Toggle theme" aria-label="Switch color theme" aria-pressed="false">◐</button>
+  </nav>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- HERO + 3D SPATIAL RIG                   -->
+<!-- ═══════════════════════════════════════ -->
+<section class="hero" id="top">
+  <canvas id="hero-3d-canvas" aria-hidden="true"></canvas>
+
+  <div class="issue-bar">
+    <span>Archive N°01</span>
+    <span class="issue-bar-center">— A Personal Publication —</span>
+    <span>Brooklyn, NY</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="word-1">Eyamin</span>
+    <span class="word-2">Evnay</span>
+    <span class="word-3">Payel.</span>
+  </h1>
+
+  <div class="hero-sub">
+    <span>Developer /01</span>
+    <span class="hero-sub-center">Observer of pixels &amp; people.</span>
+    <span class="hero-sub-right">Photographer /02</span>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-col">
+      <div class="col-label"><span>Biography</span><span>I</span></div>
+      <p class="drop-cap">
+        I build <em>web experiences</em>, personal AI tools, and mobile apps. Based in New York and studying Computer Information Systems at BMCC, I bring a photographer’s eye to the things I make.
+      </p>
+      <div class="hero-actions">
+        <a class="primary-link" href="#works">Explore my work <span aria-hidden="true">↗</span></a>
+        <a href="#correspondence">Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+
+    <div class="hero-col">
+      <div class="portrait-stage">
+        <div class="portrait-frame" data-tilt data-tilt-max="13">
+          <div class="portrait-shadow-plate" aria-hidden="true"></div>
+          <span class="portrait-corner tl" aria-hidden="true">✦</span>
+          <span class="portrait-corner br" aria-hidden="true">✦</span>
+          <div class="portrait-bg">
+            <div class="portrait-inner" id="portrait-container">
+              <img fetchpriority="high" decoding="async" src="portrait.jpg" alt="Eyamin Evnay Payel" onerror="renderPortraitFallback(this)">
+            </div>
+          </div>
+          <div class="portrait-glare" aria-hidden="true"></div>
+          <div class="portrait-caption">EYAMIN. Self-portrait, 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-col">
+      <div class="col-label"><span>Particulars</span><span>II</span></div>
+      <div class="meta-list">
+        <div class="meta-item"><span class="key">Born</span><span class="val">Bangladesh</span></div>
+        <div class="meta-item"><span class="key">Based</span><span class="val">New York</span></div>
+        <div class="meta-item"><span class="key">Studying</span><span class="val">Comp Info Systems</span></div>
+        <div class="meta-item"><span class="key">At</span><span class="val">BMCC · CUNY</span></div>
+        <div class="meta-item"><span class="key">Building</span><span class="val">Web · Data · Images</span></div>
+        <div class="meta-item"><span class="key">Currently</span><span class="val">Open to work</span></div>
+      </div>
+      <p class="meta-quote">Technical precision and aesthetic sensitivity aren't opposites — they're partners.</p>
+      <p class="meta-quote-attr">— personal ethos, 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="hero-marquee" aria-hidden="true">
+  <div class="hero-marquee-inner">
+    Web Development <span class="sep">✦</span>
+    <em>Photography</em> <span class="sep">✦</span>
+    Data &amp; Databases <span class="sep">✦</span>
+    <em>Visual Thinking</em> <span class="sep">✦</span>
+    Entrepreneurship <span class="sep">✦</span>
+    <em>Curiosity</em> <span class="sep">✦</span>
+    Web Development <span class="sep">✦</span>
+    <em>Photography</em> <span class="sep">✦</span>
+    Data &amp; Databases <span class="sep">✦</span>
+    <em>Visual Thinking</em> <span class="sep">✦</span>
+    Entrepreneurship <span class="sep">✦</span>
+    <em>Curiosity</em> <span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- WORKS                                   -->
+<!-- ═══════════════════════════════════════ -->
+<section id="works">
+  <div class="section-head rv">
+    <div class="section-num">§ 01</div>
+    <h2 class="section-title">Selected <em>Works.</em></h2>
+    <div class="section-meta">
+      Five projects<br>
+      2024 — 2026
+    </div>
+  </div>
+
+  <div class="works-toolbar rv">
+    <div class="filter-pills" role="group" aria-label="Filter projects by category">
+      <button class="filter-pill active" data-filter="all">All (5)</button>
+      <button class="filter-pill" data-filter="ai">AI &amp; Systems</button>
+      <button class="filter-pill" data-filter="mobile">Mobile</button>
+      <button class="filter-pill" data-filter="web">Web Craft</button>
+    </div>
+    <span class="works-hint">Select any plate to inspect case study ↗</span>
+  </div>
+
+  <div class="works-grid">
+    <!-- Project 01: FRIDAY AI -->
+    <article class="work-item work-item-flagship rv" data-tilt data-tilt-max="7" data-cat="ai" data-project="friday" tabindex="0" role="button" aria-label="Inspect F.R.I.D.A.Y AI case study">
+      <div class="work-head-row">
+        <span class="work-num">Project N°01 · Flagship</span>
+        <span class="work-inspect">Inspect ↗</span>
+      </div>
+      <div class="work-visual">
+        <canvas id="friday-3d-canvas" width="260" height="180" aria-label="Interactive 3D orbital visualization for F.R.I.D.A.Y AI"></canvas>
+      </div>
+      <h3 class="work-title">F.R.I.D.A.Y AI</h3>
+      <p class="work-desc">A personal AI assistant that connects voice and chat with everyday tools. Built in Python with browser control, Spotify, Gmail, and agentic tool-calling.</p>
+      <div class="work-tags">
+        <span class="work-tag">Python</span>
+        <span class="work-tag">OpenAI</span>
+        <span class="work-tag">ElevenLabs</span>
+        <span class="work-tag">Voice AI</span>
+        <span class="work-tag">FastAPI</span>
+      </div>
+    </article>
+
+    <!-- Project 02: Personal Portfolio -->
+    <article class="work-item rv" style="transition-delay:.06s" data-tilt data-tilt-max="7" data-cat="web" data-project="portfolio" tabindex="0" role="button" aria-label="Inspect Personal Portfolio case study">
+      <div class="work-head-row">
+        <span class="work-num">Project N°02</span>
+        <span class="work-inspect">Inspect ↗</span>
+      </div>
+      <div class="work-visual">
+        <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="14" y="12" width="172" height="116" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="14" y1="30" x2="186" y2="30" stroke="currentColor" stroke-width="1"/>
+          <circle cx="25" cy="21" r="2.5" fill="currentColor"/>
+          <circle cx="35" cy="21" r="2.5" fill="currentColor"/>
+          <circle cx="45" cy="21" r="2.5" fill="var(--accent)"/>
+          <rect x="58" y="16" width="114" height="10" rx="5" fill="none" stroke="currentColor" stroke-width="0.9"/>
+          <rect x="28" y="45" width="76" height="8" fill="currentColor" opacity="0.9"/>
+          <rect x="28" y="59" width="106" height="4" fill="currentColor" opacity="0.45"/>
+          <rect x="28" y="67" width="88" height="4" fill="currentColor" opacity="0.45"/>
+          <rect x="28" y="84" width="42" height="32" fill="currentColor" opacity="0.18" stroke="currentColor" stroke-width="0.8"/>
+          <rect x="76" y="84" width="42" height="32" fill="var(--accent)" opacity="0.22" stroke="var(--accent)" stroke-width="0.8"/>
+          <rect x="124" y="84" width="42" height="32" fill="currentColor" opacity="0.18" stroke="currentColor" stroke-width="0.8"/>
+          <text x="168" y="53" font-family="serif" font-size="13" fill="var(--accent)">✦</text>
+        </svg>
+      </div>
+      <h3 class="work-title">Personal Portfolio</h3>
+      <p class="work-desc">A living archive of work, presented with care. Responsive editorial grids, light and dark themes, interactive 3D plates, and typography-driven navigation.</p>
+      <div class="work-tags">
+        <span class="work-tag">HTML</span>
+        <span class="work-tag">CSS 3D</span>
+        <span class="work-tag">JavaScript</span>
+        <span class="work-tag">Live</span>
+      </div>
+    </article>
+
+    <!-- Project 03: Love Vlog -->
+    <article class="work-item rv" style="transition-delay:.12s" data-tilt data-tilt-max="7" data-cat="web" data-project="lovevlog" tabindex="0" role="button" aria-label="Inspect Love Vlog case study">
+      <div class="work-head-row">
+        <span class="work-num">Project N°03</span>
+        <span class="work-inspect">Inspect ↗</span>
+      </div>
+      <div class="work-visual">
+        <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="12" y="10" width="176" height="120" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="12" y="10" width="176" height="18" fill="currentColor" opacity="0.14"/>
+          <rect x="12" y="112" width="176" height="18" fill="currentColor" opacity="0.14"/>
+          <circle cx="24" cy="19" r="2" fill="currentColor"/>
+          <circle cx="44" cy="19" r="2" fill="currentColor"/>
+          <circle cx="64" cy="19" r="2" fill="currentColor"/>
+          <circle cx="136" cy="19" r="2" fill="currentColor"/>
+          <circle cx="156" cy="19" r="2" fill="currentColor"/>
+          <circle cx="176" cy="19" r="2" fill="currentColor"/>
+          <circle cx="24" cy="121" r="2" fill="currentColor"/>
+          <circle cx="44" cy="121" r="2" fill="currentColor"/>
+          <circle cx="64" cy="121" r="2" fill="currentColor"/>
+          <circle cx="136" cy="121" r="2" fill="currentColor"/>
+          <circle cx="156" cy="121" r="2" fill="currentColor"/>
+          <circle cx="176" cy="121" r="2" fill="currentColor"/>
+          <path d="M100 54 L92 47 Q85 44 85 53 Q85 64 100 77 Q115 64 115 53 Q115 44 108 47 Z" fill="var(--accent)"/>
+          <text x="100" y="96" font-family="Georgia, serif" font-style="italic" font-size="11" text-anchor="middle" fill="currentColor">a love letter</text>
+        </svg>
+      </div>
+      <h3 class="work-title">Love Vlog.</h3>
+      <p class="work-desc">A storytelling platform built for intimacy and slowness — cinematic layouts that frame personal narrative with editorial elegance.</p>
+      <div class="work-tags">
+        <span class="work-tag">HTML</span>
+        <span class="work-tag">CSS</span>
+        <span class="work-tag">Narrative</span>
+        <span class="work-tag">UX</span>
+      </div>
+    </article>
+
+    <!-- Project 04: Responsive Calculator -->
+    <article class="work-item rv" style="transition-delay:.18s" data-tilt data-tilt-max="7" data-cat="web" data-project="calculator" tabindex="0" role="button" aria-label="Inspect Responsive Calculator case study">
+      <div class="work-head-row">
+        <span class="work-num">Project N°04</span>
+        <span class="work-inspect">Inspect ↗</span>
+      </div>
+      <div class="work-visual">
+        <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="55" y="10" width="90" height="120" rx="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <rect x="62" y="17" width="76" height="22" fill="currentColor" opacity="0.12"/>
+          <text x="132" y="32" font-family="monospace" font-size="10" text-anchor="end" fill="currentColor">7 × 9</text>
+          <g fill="currentColor">
+            <circle cx="72" cy="53" r="5" opacity="0.25"/><circle cx="90" cy="53" r="5" opacity="0.25"/><circle cx="108" cy="53" r="5" opacity="0.25"/><circle cx="126" cy="53" r="5" fill="var(--accent)"/>
+            <circle cx="72" cy="72" r="5" opacity="0.25"/><circle cx="90" cy="72" r="5" opacity="0.25"/><circle cx="108" cy="72" r="5" opacity="0.25"/><circle cx="126" cy="72" r="5" fill="var(--accent)"/>
+            <circle cx="72" cy="91" r="5" opacity="0.25"/><circle cx="90" cy="91" r="5" opacity="0.25"/><circle cx="108" cy="91" r="5" opacity="0.25"/><circle cx="126" cy="91" r="5" fill="var(--accent)"/>
+            <circle cx="72" cy="110" r="5" opacity="0.25"/><circle cx="90" cy="110" r="5" opacity="0.25"/><circle cx="108" cy="110" r="5" opacity="0.25"/><circle cx="126" cy="110" r="5" fill="var(--accent)"/>
+          </g>
+        </svg>
+      </div>
+      <h3 class="work-title">Responsive Calculator</h3>
+      <p class="work-desc">Utility at its most elegant. Full keyboard support, fluid scaling across screen sizes, and micro-interactions that make arithmetic feel considered.</p>
+      <div class="work-tags">
+        <span class="work-tag">HTML</span>
+        <span class="work-tag">CSS</span>
+        <span class="work-tag">JavaScript</span>
+        <span class="work-tag">Keyboard</span>
+      </div>
+    </article>
+
+    <!-- Project 05: YAQEEN Featured with 3D Interactive Phone -->
+    <article class="work-item work-item-featured rv" style="transition-delay:.24s" data-tilt data-tilt-max="4" data-cat="mobile" data-project="yaqeen" tabindex="0" role="button" aria-label="Inspect Yaqeen mobile app case study">
+      <div style="display:flex;flex-direction:column;gap:0.9rem;">
+        <div class="work-head-row">
+          <span class="work-num">Project N°05 · Mobile App</span>
+          <span class="work-inspect">Inspect ↗</span>
+        </div>
+        <div class="phone-3d-stage" aria-hidden="true">
+          <div class="phone-3d-device">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-ring-wrap">
+                <svg class="phone-ring-svg" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(243,237,226,0.14)" stroke-width="5"/>
+                  <circle class="phone-ring-arc" cx="50" cy="50" r="40" fill="none" stroke="#d4af6a" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                <div class="phone-ring-label">
+                  <span class="prayer-name">Maghrib</span>
+                  <span class="prayer-time">00:42</span>
+                </div>
+              </div>
+              <div class="phone-rows">
+                <div class="phone-row"><span>Fajr</span><span class="check">✓ 05:14</span></div>
+                <div class="phone-row"><span>Dhuhr</span><span class="check">✓ 12:08</span></div>
+                <div class="phone-row"><span>Asr</span><span class="check">✓ 15:26</span></div>
+                <div class="phone-row"><span>Qibla · 58° NE</span><span class="check">✦</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="work-tags">
+          <span class="work-tag">React Native</span>
+          <span class="work-tag">TypeScript</span>
+          <span class="work-tag">Expo</span>
+          <span class="work-tag">Zustand</span>
+          <span class="work-tag">Reanimated</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:1rem;">
+        <h3 class="work-title">Yaqeen <em>(يقين)</em></h3>
+        <p class="work-desc">
+          Islamic Daily Companion — a full-featured mobile app with real-time location-based prayer times, salah streak tracking, smart dual notifications with adhan sounds, Qibla compass, Qaza counter, and a Quran quote slideshow. Built solo from the ground up as a spiritually grounding, technically modern experience.
+        </p>
+        <div class="work-cta-row">
+          <a href="https://drive.google.com/uc?export=download&id=1U6S3av8EJi0YtlCCWTP1ksZ1OC-hDJga"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-download"
+             onclick="event.stopPropagation()">
+            <span>↓ Download APK</span>
+          </a>
+          <button type="button" class="btn-secondary" onclick="event.stopPropagation(); openProjectModal('yaqeen')">
+            <span>Architecture Notes ↗</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="work-item-featured-meta">
+        <div class="col-label"><span>Tech Stack</span><span>V</span></div>
+        <div class="work-item-featured-stack">
+          <div class="stack-row"><span class="stack-key">Framework</span><span class="stack-val">Expo SDK 56</span></div>
+          <div class="stack-row"><span class="stack-key">Language</span><span class="stack-val">TypeScript</span></div>
+          <div class="stack-row"><span class="stack-key">Navigation</span><span class="stack-val">Expo Router</span></div>
+          <div class="stack-row"><span class="stack-key">State</span><span class="stack-val">Zustand v5</span></div>
+          <div class="stack-row"><span class="stack-key">Animations</span><span class="stack-val">Reanimated v4</span></div>
+          <div class="stack-row"><span class="stack-key">Notifs</span><span class="stack-val">expo-notifications</span></div>
+          <div class="stack-row"><span class="stack-key">API</span><span class="stack-val">Aladhan</span></div>
+          <div class="stack-row"><span class="stack-key">Build</span><span class="stack-val">EAS Build</span></div>
+        </div>
+        <p class="meta-quote" style="font-size:.9rem;margin-top:.2rem;">
+          Prayer times. Streak data. Qibla direction. All in one dark, gold-accented interface.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DOSSIER                                 -->
+<!-- ═══════════════════════════════════════ -->
+<section id="dossier">
+  <div class="section-head rv">
+    <div class="section-num">§ 02</div>
+    <h2 class="section-title">The <em>Dossier.</em></h2>
+    <div class="section-meta">Filed under<br>personal archive</div>
+  </div>
+
+  <div class="dossier-grid">
+    <aside class="dossier-card-stage rv">
+      <div class="dossier-card" data-tilt data-tilt-max="10">
+        <div class="dossier-card-title">◆ Subject File</div>
+        <div class="dossier-id">Payel, <em>E. E.</em></div>
+        <div class="dossier-role">Developer · Creative</div>
+
+        <div class="dossier-stamp">
+          <div class="dossier-stamp-row"><span class="k">ID</span><span>EP-2026</span></div>
+          <div class="dossier-stamp-row"><span class="k">Status</span><span>Active</span></div>
+          <div class="dossier-stamp-row"><span class="k">Clearance</span><span>Open</span></div>
+          <div class="dossier-stamp-row"><span class="k">Sector</span><span>Tech · Art</span></div>
+        </div>
+
+        <div class="dossier-mark">Verified</div>
+      </div>
+    </aside>
+
+    <div class="dossier-content rv">
+      <h3>A student of the space<br>between disciplines.</h3>
+      <p>
+        My academic path follows the discipline of <em>computer information systems</em> at BMCC — but my curiosity has never stayed neatly in one lane. I build web experiences with the precision of an engineer and the eye of a photographer. I wrangle data by day and chase light by evening.
+      </p>
+
+      <blockquote class="pull-quote">“The grid and the glow. The code and the composition. I want both.”</blockquote>
+
+      <p>
+        I grew up fascinated by how <em>systems</em> work — how small pieces combine to create something larger than themselves. That curiosity has carried into web development, where every tag, every query, every pixel contributes to a whole. It's carried into photography, where light, moment, and framing do the same.
+      </p>
+      <p>
+        My long-term vision is <em>entrepreneurship</em> — building a technology-driven business from the ground up, where design thinking and technical craft aren't separate departments but one shared language. Every project I ship now is a brick in that foundation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- INSTRUMENTS                             -->
+<!-- ═══════════════════════════════════════ -->
+<section id="instruments">
+  <div class="section-head rv">
+    <div class="section-num">§ 03</div>
+    <h2 class="section-title">The <em>Instruments.</em></h2>
+    <div class="section-meta">Tools of the trade<br>&amp; practical depth</div>
+  </div>
+
+  <div class="instruments-grid">
+    <div class="instrument rv" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°01</div>
+      <div class="instrument-glyph">&lt;/&gt;</div>
+      <div class="instrument-name">HTML</div>
+      <div class="instrument-cat">Semantic Structure</div>
+      <div class="instrument-tier">Core · Production</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.05s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°02</div>
+      <div class="instrument-glyph">❋</div>
+      <div class="instrument-name">CSS</div>
+      <div class="instrument-cat">Layout &amp; 3D Motion</div>
+      <div class="instrument-tier">Core · Editorial Systems</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.1s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°03</div>
+      <div class="instrument-glyph">⚡</div>
+      <div class="instrument-name"><em>JavaScript</em> &amp; TS</div>
+      <div class="instrument-cat">Interactive Logic</div>
+      <div class="instrument-tier">Daily · Web &amp; Expo</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.15s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°04</div>
+      <div class="instrument-glyph">◈</div>
+      <div class="instrument-name">Python</div>
+      <div class="instrument-cat">Agents &amp; APIs</div>
+      <div class="instrument-tier">Systems · FastAPI</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.2s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°05</div>
+      <div class="instrument-glyph">▦</div>
+      <div class="instrument-name">SQL</div>
+      <div class="instrument-cat">Relational Data</div>
+      <div class="instrument-tier">CIS · Schema &amp; Query</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.25s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°06</div>
+      <div class="instrument-glyph">◉</div>
+      <div class="instrument-name"><em>Photography</em></div>
+      <div class="instrument-cat">Light &amp; Composition</div>
+      <div class="instrument-tier">Practice · Phone &amp; Film</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.3s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°07</div>
+      <div class="instrument-glyph">✦</div>
+      <div class="instrument-name">AI Tools</div>
+      <div class="instrument-cat">Voice &amp; Agent Workflows</div>
+      <div class="instrument-tier">Builder · OpenAI &amp; Voice</div>
+    </div>
+    <div class="instrument rv" style="transition-delay:.35s" data-tilt data-tilt-max="9">
+      <div class="instrument-num">N°08</div>
+      <div class="instrument-glyph">◐</div>
+      <div class="instrument-name">Git &amp; <em>GitHub</em></div>
+      <div class="instrument-cat">Version Control</div>
+      <div class="instrument-tier">Workflow · CI &amp; Releases</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- GALLERY                                 -->
+<!-- ═══════════════════════════════════════ -->
+<section id="gallery">
+  <div class="corr-star" aria-hidden="true"></div>
+  <div class="section-head rv">
+    <div class="section-num">§ 04</div>
+    <h2 class="section-title">The <em>Gallery.</em></h2>
+    <div class="section-meta">Plates I – VII<br>Observed, 2024—2026</div>
+  </div>
+
+  <p class="gallery-intro rv">
+    A small collection of images — <em>observations</em> of light, form, and fleeting composition. Photography is how I practice the slower kind of attention. Select any plate to inspect in the darkroom viewer.
+  </p>
+
+  <div class="gallery-grid">
+    <button type="button" class="photo photo-1 rv" data-tilt data-tilt-max="6" data-plate="0" aria-label="Open Plate I: Peace of Mind, NY">
+      <div class="photo-visual"><img src="gallery/plate-1.jpg" loading="lazy" decoding="async" alt="Peace of Mind, New York" onerror="renderGalleryFallback(this, 'Plate I', 'Peace of Mind, NY')"></div>
+      <div class="photo-caption">Plate I · Peace of Mind, NY</div>
+    </button>
+
+    <button type="button" class="photo photo-2 rv" data-tilt data-tilt-max="6" data-plate="1" aria-label="Open Plate II: Personal Photographer, NY">
+      <div class="photo-visual"><img src="gallery/plate-2.jpg" loading="lazy" decoding="async" alt="Personal Photographer, New York" style="object-position:47% 100%;" onerror="renderGalleryFallback(this, 'Plate II', 'Personal Photographer, NY')"></div>
+      <div class="photo-caption">Plate II · Personal Photographer, NY</div>
+    </button>
+
+    <button type="button" class="photo photo-3 rv" data-tilt data-tilt-max="6" data-plate="2" aria-label="Open Plate III: Sunset">
+      <div class="photo-visual"><img src="gallery/plate-3.jpg" loading="lazy" decoding="async" alt="Sunset" onerror="renderGalleryFallback(this, 'Plate III', 'Sunset')"></div>
+      <div class="photo-caption">Plate III · Sunset</div>
+    </button>
+
+    <button type="button" class="photo photo-4 rv" data-tilt data-tilt-max="6" data-plate="3" aria-label="Open Plate IV: Snow Carpet, Central Park">
+      <div class="photo-visual"><img src="gallery/plate-4.jpg" loading="lazy" decoding="async" alt="Snow Carpet, Central Park" onerror="renderGalleryFallback(this, 'Plate IV', 'Snow Carpet, Central Park')"></div>
+      <div class="photo-caption">Plate IV · Snow Carpet, Central Park</div>
+    </button>
+
+    <button type="button" class="photo photo-5 rv" data-tilt data-tilt-max="6" data-plate="4" aria-label="Open Plate V: Rockaway Sunset, Rockaway Beach">
+      <div class="photo-visual"><img src="gallery/plate-5.jpg" loading="lazy" decoding="async" alt="Rockaway Sunset, Rockaway Beach" style="object-position:39% 51%;" onerror="renderGalleryFallback(this, 'Plate V', 'Rockaway Sunset, Rockaway Beach')"></div>
+      <div class="photo-caption">Plate V · Rockaway Sunset, Rockaway Beach</div>
+    </button>
+
+    <button type="button" class="photo photo-6 rv" data-tilt data-tilt-max="6" data-plate="5" aria-label="Open Plate VI: Wave in The Sky">
+      <div class="photo-visual"><img src="gallery/plate-6.jpg" loading="lazy" decoding="async" alt="Wave in the Sky" onerror="renderGalleryFallback(this, 'Plate VI', 'Wave in The Sky')"></div>
+      <div class="photo-caption">Plate VI · Wave in The Sky</div>
+    </button>
+
+    <button type="button" class="photo photo-7 rv" data-tilt data-tilt-max="6" data-plate="6" aria-label="Open Plate VII: Tools of observation">
+      <div class="photo-visual"><img src="gallery/plate-7.jpg" loading="lazy" decoding="async" alt="Tools of observation" style="object-position:50% 75%;" onerror="renderGalleryFallback(this, 'Plate VII', 'Tools of observation')"></div>
+      <div class="photo-caption">Plate VII · Tools of observation</div>
+    </button>
+  </div>
+
+  <p class="gallery-note">
+    <em>note</em> — full gallery available on request. These are personal observations, shot on phone &amp; film.
+  </p>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- DOCUMENT / RESUME                       -->
+<!-- ═══════════════════════════════════════ -->
+<section id="document">
+  <div class="doc-wrapper rv">
+    <div class="doc-stamp">✦ Document · N°001</div>
+    <h2 class="doc-title">The <em>Résumé.</em></h2>
+    <p class="doc-sub">
+      For a closer look at my education, experience, and skills, preview the interactive résumé sheet or request a copy by email.
+    </p>
+
+    <div class="resume-card">
+      <div class="resume-icon" aria-hidden="true"></div>
+      <div>
+        <div class="resume-info-label">Archive Edition · 2026</div>
+        <div class="resume-info-title">Eyamin Evnay Payel</div>
+        <div class="resume-info-meta"><em>Education, projects, and technical experience</em></div>
+      </div>
+      <div class="resume-actions">
+        <button type="button" class="btn-secondary" onclick="openCvModal()">
+          <span>Preview CV ↗</span>
+        </button>
+        <a href="mailto:eyaminevnaypayel@gmail.com?subject=Resume%20request" class="btn-download">
+          <span>Request PDF ↗</span>
+        </a>
+      </div>
+    </div>
+
+    <p style="font-family: var(--italic); font-style: italic; color: var(--muted); font-size: 0.96rem;">
+      or request a darkroom print by <a href="mailto:eyaminevnaypayel@gmail.com" style="color: var(--accent);">mail</a>.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- CORRESPONDENCE                          -->
+<!-- ═══════════════════════════════════════ -->
+<section id="correspondence">
+  <div class="corr-star" aria-hidden="true"></div>
+  <div class="corr-inner">
+    <div class="corr-label rv">✦ § 05 · Correspondence</div>
+    <h2 class="corr-title rv">Write to <em>me.</em></h2>
+    <p class="corr-sub rv">
+      For opportunities, collaborations, questions, or simply the pleasure of correspondence —
+      I read every message and reply in kind.
+    </p>
+    <div class="corr-links rv">
+      <a href="mailto:eyaminevnaypayel@gmail.com" class="corr-link">✉ Email</a>
+      <a href="https://github.com/itzeyamin04" target="_blank" rel="noopener noreferrer" class="corr-link">◆ GitHub</a>
+      <a href="https://www.linkedin.com/in/eyamin-evnay-payel-098b641b0/" target="_blank" rel="noopener noreferrer" class="corr-link">in LinkedIn</a>
+      <a href="https://www.instagram.com/im_eyamin__/" target="_blank" rel="noopener noreferrer" class="corr-link">◉ Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- Colophon -->
+<footer class="colophon">
+  <div>© MMXXVI · Eyamin Evnay Payel</div>
+  <div class="colophon-center">
+    Set in <em>Fraunces</em> &amp; <em>Instrument Serif</em>. Built in <em>New York</em>.
+  </div>
+  <div class="colophon-right"><a href="#top">↑ Return to top</a></div>
+</footer>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- MODALS (PROJECT, LIGHTBOX, CV)          -->
+<!-- ═══════════════════════════════════════ -->
+<div class="archive-modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+  <div class="modal-card">
+    <button class="modal-close" type="button" aria-label="Close project details" onclick="closeAllModals()">✕</button>
+    <div class="modal-kicker" id="pm-kicker"></div>
+    <h3 class="modal-title" id="pm-title"></h3>
+    <p class="modal-summary" id="pm-summary"></p>
+    <div class="modal-grid">
+      <div class="modal-block">
+        <h4>Key Highlights</h4>
+        <ul id="pm-highlights"></ul>
+      </div>
+      <div class="modal-block">
+        <h4>Architecture &amp; Stack</h4>
+        <ul id="pm-stack"></ul>
+      </div>
+    </div>
+    <div class="work-cta-row" id="pm-actions"></div>
+  </div>
+</div>
+
+<div class="archive-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+  <div class="lightbox-card">
+    <button class="modal-close" type="button" aria-label="Close gallery viewer" onclick="closeAllModals()">✕</button>
+    <div class="lightbox-stage" id="lb-stage"></div>
+    <div class="lightbox-bar">
+      <div>
+        <div class="modal-kicker" id="lb-num" style="margin-bottom:0.2rem;"></div>
+        <div id="lb-title" style="font-family:var(--italic);font-style:italic;font-size:1.35rem;"></div>
+      </div>
+      <div class="lightbox-nav">
+        <button type="button" onclick="stepLightbox(-1)">← Prev</button>
+        <button type="button" onclick="stepLightbox(1)">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="archive-modal" id="cv-modal" role="dialog" aria-modal="true" aria-labelledby="cv-heading">
+  <div class="modal-card">
+    <button class="modal-close" type="button" aria-label="Close résumé preview" onclick="closeAllModals()">✕</button>
+    <div class="modal-kicker">Document N°001 · Curriculum Vitae</div>
+    <h3 class="modal-title" id="cv-heading">Eyamin Evnay Payel</h3>
+    <p class="modal-summary" style="margin-bottom:1.2rem;">
+      Brooklyn, NY · Computer Information Systems Student (BMCC · CUNY) · Developer &amp; Photographer ·
+      <a href="mailto:eyaminevnaypayel@gmail.com" style="color:var(--accent);">eyaminevnaypayel@gmail.com</a>
+    </p>
+
+    <div class="cv-section">
+      <h4>Education</h4>
+      <div class="cv-row"><strong>Borough of Manhattan Community College (BMCC · CUNY)</strong><span>New York, NY</span></div>
+      <p style="font-size:0.94rem;color:var(--muted);">A.A.S. / B.S. Track — Computer Information Systems · Web Architecture, Database Systems (SQL), Programming Logic.</p>
+    </div>
+
+    <div class="cv-section">
+      <h4>Selected Engineering Projects</h4>
+      <div class="cv-row"><strong>Yaqeen (يقين) — Islamic Daily Companion App</strong><span>Expo SDK 56 · TypeScript</span></div>
+      <p style="font-size:0.92rem;color:var(--muted);margin-bottom:0.7rem;">Built solo with Expo Router, Zustand v5, Reanimated v4, Aladhan API, dual adhan notifications, Qibla compass, and EAS Build APK distribution.</p>
+      <div class="cv-row"><strong>F.R.I.D.A.Y AI — Personal Voice &amp; Agentic Assistant</strong><span>Python · OpenAI · FastAPI</span></div>
+      <p style="font-size:0.92rem;color:var(--muted);">Voice-and-text assistant integrating ElevenLabs speech synthesis, browser automation, Spotify playback, and Gmail tooling.</p>
+    </div>
+
+    <div class="cv-section">
+      <h4>Core Instruments</h4>
+      <p style="font-size:0.94rem;line-height:1.65;">HTML, CSS (Grid, 3D Transforms), JavaScript, TypeScript, React Native / Expo, Python, FastAPI, SQL, Git &amp; GitHub, Editorial Design &amp; Photography.</p>
+    </div>
+
+    <div class="work-cta-row no-print">
+      <button type="button" class="btn-download" onclick="window.print()">Print / Save PDF ↗</button>
+      <a href="mailto:eyaminevnaypayel@gmail.com?subject=Opportunity%20for%20Eyamin" class="btn-secondary">Email Eyamin ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- F.R.I.D.A.Y CHAT WIDGET                 -->
+<!-- ═══════════════════════════════════════ -->
+<button id="friday-btn" onclick="fridayToggle()" title="Chat with F.R.I.D.A.Y" aria-label="Chat with F.R.I.D.A.Y" aria-expanded="false" aria-controls="friday-panel">
+  <span class="friday-tooltip">Ask F.R.I.D.A.Y</span>
+  ✦
+</button>
+
+<div id="friday-panel" role="region" aria-label="F.R.I.D.A.Y assistant">
+  <div class="chat-header">
+    <div>
+      <div class="chat-title">F.R.I.D.A.Y <em>AI</em></div>
+      <div class="chat-sub" id="friday-status">Personal Assistant · Archive Ready</div>
+    </div>
+    <button class="chat-close" aria-label="Close chat" onclick="fridayToggle()">✕</button>
+  </div>
+  <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+    <div class="msg msg-friday">
+      <div class="msg-sender">F.R.I.D.A.Y</div>
+      Hello — I'm F.R.I.D.A.Y, Eyamin's personal assistant. Ask me about his projects, tech stack, BMCC studies, or how to reach him.
+    </div>
+  </div>
+  <div class="chat-prompts" aria-label="Suggested questions">
+    <button type="button" class="chat-chip" onclick="fridayQuickAsk('Tell me about Yaqeen')">About Yaqeen</button>
+    <button type="button" class="chat-chip" onclick="fridayQuickAsk('What stack does F.R.I.D.A.Y use?')">F.R.I.D.A.Y stack</button>
+    <button type="button" class="chat-chip" onclick="fridayQuickAsk('Is Eyamin open to work?')">Availability</button>
+  </div>
+  <div class="chat-typing" id="chat-typing">
+    <div class="typing-dots"><span></span><span></span><span></span></div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chat-input" aria-label="Message F.R.I.D.A.Y" placeholder="Ask something…" onkeydown="if(event.key==='Enter')fridaySend()">
+    <button class="chat-send" id="chat-send-btn" onclick="fridaySend()">Send</button>
+  </div>
+</div>
+
+<script>
+const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canHoverTilt = matchMedia('(hover: hover) and (pointer: fine)').matches && !prefersReducedMotion;
+
+/* ── FALLBACKS WHEN LOCAL IMAGE FILES ARE NOT NEXT TO INDEX.HTML ── */
+function renderPortraitFallback(img) {
+  const wrap = img.parentElement;
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Editorial Self-Portrait Monogram">
+      <defs>
+        <radialGradient id="pGlow" cx="50%" cy="38%" r="55%">
+          <stop offset="0%" stop-color="#c73e1d" stop-opacity="0.34"/>
+          <stop offset="65%" stop-color="#b08d47" stop-opacity="0.1"/>
+          <stop offset="100%" stop-color="#14100c" stop-opacity="1"/>
+        </radialGradient>
+      </defs>
+      <rect width="300" height="400" fill="#14100c"/>
+      <rect width="300" height="400" fill="url(#pGlow)"/>
+      <circle cx="150" cy="175" r="96" fill="none" stroke="#f3ede2" stroke-opacity="0.16" stroke-width="1"/>
+      <circle cx="150" cy="175" r="74" fill="none" stroke="#c73e1d" stroke-opacity="0.5" stroke-dasharray="4 6" stroke-width="1"/>
+      <circle cx="150" cy="145" r="32" fill="none" stroke="#f3ede2" stroke-opacity="0.82" stroke-width="1.4"/>
+      <path d="M92 260 C92 212 208 212 208 260" fill="none" stroke="#f3ede2" stroke-opacity="0.82" stroke-width="1.4"/>
+      <text x="150" y="335" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="18" fill="#f3ede2" fill-opacity="0.9">E. E. Payel</text>
+      <text x="150" y="357" text-anchor="middle" font-family="monospace" font-size="9" letter-spacing="2.5" fill="#c73e1d">PORTRAIT PLATE · NY</text>
+    </svg>`;
+}
+
+function renderGalleryFallback(img, plate, title) {
+  const wrap = img.parentElement;
+  if (!wrap) return;
+  wrap.innerHTML = `
+    <div class="photo-fallback">
+      <span class="photo-fallback-num">${plate}</span>
+      <svg class="photo-fallback-art" width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="42" cy="42" r="34" stroke="#f3ede2" stroke-opacity="0.35" stroke-width="1"/>
+        <circle cx="42" cy="42" r="20" stroke="#c73e1d" stroke-width="1.4"/>
+        <line x1="8" y1="42" x2="76" y2="42" stroke="#f3ede2" stroke-opacity="0.2" stroke-width="1"/>
+        <line x1="42" y1="8" x2="42" y2="76" stroke="#f3ede2" stroke-opacity="0.2" stroke-width="1"/>
+      </svg>
+      <span style="font-family:var(--italic);font-style:italic;font-size:1rem;opacity:0.75;">${title}</span>
+    </div>`;
+}
+
+/* ── THEME TOGGLE ── */
+let dark = matchMedia('(prefers-color-scheme: dark)').matches;
+try { const saved = localStorage.getItem('payel-theme'); if (saved) dark = saved === 'dark'; } catch {}
+
+function getThemeColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    ink: s.getPropertyValue('--ink').trim() || '#1a1511',
+    accent: s.getPropertyValue('--accent').trim() || '#c73e1d',
+    gold: s.getPropertyValue('--gold').trim() || '#9a7632',
+    muted: s.getPropertyValue('--muted').trim() || '#61584b'
+  };
+}
+
+let themeColors = getThemeColors();
+
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : '');
+  const button = document.getElementById('theme-toggle-btn');
+  if (button) {
+    button.textContent = dark ? '◑' : '◐';
+    button.setAttribute('aria-pressed', String(dark));
+  }
+  requestAnimationFrame(() => { themeColors = getThemeColors(); });
+}
+
+document.getElementById('theme-toggle-btn').addEventListener('click', () => {
+  document.body.classList.add('theme-ready');
+  dark = !dark;
+  applyTheme();
+  try { localStorage.setItem('payel-theme', dark ? 'dark' : 'light'); } catch {}
+});
+applyTheme();
+
+/* ── LIVE NYC CLOCK & SCROLL DEPTH PROGRESS ── */
+function updateClock() {
+  const el = document.getElementById('nyc-clock');
+  if (!el) return;
+  try {
+    const time = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'America/New_York',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    }).format(new Date());
+    el.textContent = `NY ${time}`;
+  } catch {}
+}
+updateClock();
+setInterval(updateClock, 30000);
+
+const progressBar = document.getElementById('scroll-progress-bar');
+const activeSectionLabel = document.getElementById('active-section-label');
+const sectionNames = {
+  top: '§ 00 FRONT',
+  works: '§ 01 WORKS',
+  dossier: '§ 02 DOSSIER',
+  instruments: '§ 03 INSTRUMENTS',
+  gallery: '§ 04 GALLERY',
+  document: '§ 05 RÉSUMÉ',
+  correspondence: '§ 06 CONTACT'
+};
+
+function updateScrollProgress() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+  if (progressBar) progressBar.style.width = `${pct.toFixed(1)}%`;
+}
+window.addEventListener('scroll', updateScrollProgress, { passive: true });
+updateScrollProgress();
+
+/* ── SCROLL REVEALS & ACTIVE SECTION TRACKING ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in');
+  });
+}, { threshold: 0.04, rootMargin: '0px 0px -20px 0px' });
+document.querySelectorAll('.rv').forEach(el => {
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight * 0.96) el.classList.add('in');
+  revealObserver.observe(el);
+});
+
+const navLinks = document.querySelectorAll('.masthead-right a[data-nav]');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const id = entry.target.id;
+    if (activeSectionLabel && sectionNames[id]) activeSectionLabel.textContent = sectionNames[id];
+    navLinks.forEach(link => link.classList.toggle('active', link.dataset.nav === id));
+  });
+}, { threshold: 0.25 });
+document.querySelectorAll('section[id]').forEach(sec => sectionObserver.observe(sec));
+
+/* ── 3D OPTICAL RETICLE CURSOR ── */
+(function initCustomCursor() {
+  if (!canHoverTilt) return;
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  const labelEl = document.getElementById('cursor-label');
+  if (!dot || !ring || !labelEl) return;
+
+  let mx = -100, my = -100;
+  let rx = -100, ry = -100;
+  let prevX = 0, prevY = 0;
+  let active = false;
+  let rafId = null;
+
+  function renderCursor() {
+    const dx = mx - rx;
+    const dy = my - ry;
+    rx += dx * 0.18;
+    ry += dy * 0.18;
+
+    const vx = Math.max(-24, Math.min(24, mx - prevX));
+    const vy = Math.max(-24, Math.min(24, my - prevY));
+    prevX += (mx - prevX) * 0.25;
+    prevY += (my - prevY) * 0.25;
+
+    const tiltX = (-vy * 1.15).toFixed(1);
+    const tiltY = (vx * 1.15).toFixed(1);
+
+    dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+    ring.style.transform = `translate3d(${rx.toFixed(2)}px, ${ry.toFixed(2)}px, 0) perspective(380px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+    const settled = Math.abs(dx) < 0.12 && Math.abs(dy) < 0.12 && Math.abs(mx - prevX) < 0.12 && Math.abs(my - prevY) < 0.12;
+    if (!settled) {
+      rafId = requestAnimationFrame(renderCursor);
+    } else {
+      ring.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
+      rafId = null;
+    }
+  }
+
+  function updateContext(target) {
+    if (!target || !(target instanceof Element)) return;
+    const isText = Boolean(target.closest('input, textarea'));
+    document.body.classList.toggle('cursor-text', isText);
+
+    let label = '';
+    if (target.closest('.photo')) label = 'View';
+    else if (target.closest('#friday-btn')) label = 'Ask AI';
+    else if (target.closest('.work-item') && !target.closest('a, button.btn-download, button.btn-secondary')) label = 'Inspect';
+    else if (target.closest('.portrait-frame')) label = '3D';
+
+    if (label) {
+      labelEl.textContent = label;
+      document.body.classList.add('cursor-labeled');
+      document.body.classList.remove('cursor-hover');
+    } else {
+      document.body.classList.remove('cursor-labeled');
+      const interactive = Boolean(target.closest('a, button, [role="button"], .filter-pill'));
+      document.body.classList.toggle('cursor-hover', interactive);
+    }
+  }
+
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    if (!active) {
+      active = true;
+      rx = e.clientX;
+      ry = e.clientY;
+      prevX = e.clientX;
+      prevY = e.clientY;
+      document.body.classList.add('has-custom-cursor', 'cursor-visible');
+    } else {
+      document.body.classList.add('cursor-visible');
+    }
+    mx = e.clientX;
+    my = e.clientY;
+    updateContext(e.target);
+    if (!rafId) rafId = requestAnimationFrame(renderCursor);
+  }, { passive: true });
+
+  document.addEventListener('pointerdown', e => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    document.body.classList.add('cursor-down');
+  }, { passive: true });
+
+  document.addEventListener('pointerup', () => {
+    document.body.classList.remove('cursor-down');
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-visible');
+  });
+})();
+
+/* ── 3D POINTER TILT ENGINE FOR CARDS, PORTRAIT, PLATES ── */
+if (canHoverTilt) {
+  document.querySelectorAll('[data-tilt]').forEach(el => {
+    const maxTilt = parseFloat(el.dataset.tiltMax || '8');
+    let rafId = null;
+    let targetRx = 0, targetRy = 0, currentRx = 0, currentRy = 0;
+    let hovering = false;
+
+    function tick() {
+      currentRx += (targetRx - currentRx) * 0.14;
+      currentRy += (targetRy - currentRy) * 0.14;
+      el.style.setProperty('--rx', `${currentRx.toFixed(2)}deg`);
+      el.style.setProperty('--ry', `${currentRy.toFixed(2)}deg`);
+
+      if (hovering || Math.abs(currentRx) > 0.04 || Math.abs(currentRy) > 0.04) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        el.style.setProperty('--rx', '0deg');
+        el.style.setProperty('--ry', '0deg');
+        rafId = null;
+      }
+    }
+
+    el.addEventListener('pointermove', e => {
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      targetRy = (px - 0.5) * maxTilt * 2;
+      targetRx = (0.5 - py) * maxTilt * 2;
+      el.style.setProperty('--mx', `${(px * 100).toFixed(1)}%`);
+      el.style.setProperty('--my', `${(py * 100).toFixed(1)}%`);
+      hovering = true;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    });
+
+    el.addEventListener('pointerleave', () => {
+      hovering = false;
+      targetRx = 0;
+      targetRy = 0;
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    });
+  });
+}
+
+/* ── 3D PROJECTION HELPER ── */
+function projectPoint3D(x, y, z, rx, ry, rz, focal, cx, cy) {
+  const cosX = Math.cos(rx), sinX = Math.sin(rx);
+  const cosY = Math.cos(ry), sinY = Math.sin(ry);
+  const cosZ = Math.cos(rz), sinZ = Math.sin(rz);
+
+  // Rotate Y
+  let x1 = x * cosY - z * sinY;
+  let z1 = z * cosY + x * sinY;
+  // Rotate X
+  let y2 = y * cosX - z1 * sinX;
+  let z2 = z1 * cosX + y * sinX;
+  // Rotate Z
+  let x3 = x1 * cosZ - y2 * sinZ;
+  let y3 = y2 * cosZ + x1 * sinZ;
+
+  const scale = focal / Math.max(80, focal + z2);
+  return {
+    x: cx + x3 * scale,
+    y: cy + y3 * scale,
+    z: z2,
+    scale
+  };
+}
+
+/* ── HERO 3D ASTROLABE + DEPTH FIELD CANVAS ── */
+(function initHero3D() {
+  const canvas = document.getElementById('hero-3d-canvas');
+  const hero = document.getElementById('top');
+  if (!canvas || !hero) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  let width = 0, height = 0, dpr = 1;
+  let anchorX = 0, anchorY = 0;
+  let pointerX = 0, pointerY = 0, smoothX = 0, smoothY = 0;
+  let heroVisible = true;
+  let t = 0;
+
+  // Depth particles in 3D space
+  const particles = Array.from({ length: 78 }, (_, i) => ({
+    x: (Math.random() - 0.5) * 1400,
+    y: (Math.random() - 0.5) * 900,
+    z: Math.random() * 700 - 200,
+    r: 0.9 + (i % 3) * 0.7,
+    accent: i % 5 === 0
+  }));
+
+  // 3D Octahedron vertices around the portrait anchor
+  const octVerts = [
+    [0, -1, 0], [1, 0, 0], [0, 0, 1],
+    [-1, 0, 0], [0, 0, -1], [0, 1, 0]
+  ];
+  const octEdges = [
+    [0, 1], [0, 2], [0, 3], [0, 4],
+    [5, 1], [5, 2], [5, 3], [5, 4],
+    [1, 2], [2, 3], [3, 4], [4, 1]
+  ];
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = hero.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const portrait = document.querySelector('.portrait-frame');
+    if (portrait) {
+      const pr = portrait.getBoundingClientRect();
+      anchorX = (pr.left - rect.left) + pr.width / 2;
+      anchorY = (pr.top - rect.top) + pr.height / 2;
+    } else {
+      anchorX = width * 0.5;
+      anchorY = height * 0.58;
+    }
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  if (canHoverTilt) {
+    hero.addEventListener('pointermove', e => {
+      const rect = hero.getBoundingClientRect();
+      pointerX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+      pointerY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    });
+  }
+
+  const heroObserver = new IntersectionObserver(entries => {
+    heroVisible = entries[0].isIntersecting;
+  }, { threshold: 0.02 });
+  heroObserver.observe(hero);
+
+  function drawRing(radius, segs, rx, ry, rz, color, alpha, widthPx) {
+    ctx.beginPath();
+    for (let i = 0; i <= segs; i++) {
+      const a = (i / segs) * Math.PI * 2;
+      const px = Math.cos(a) * radius;
+      const py = Math.sin(a) * radius;
+      const pt = projectPoint3D(px, py, 0, rx, ry, rz, 720, anchorX, anchorY);
+      if (i === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    }
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = widthPx;
+    ctx.stroke();
+  }
+
+  function renderFrame() {
+    if (heroVisible && !document.hidden) {
+      if (!prefersReducedMotion) t += 0.008;
+      smoothX += (pointerX - smoothX) * 0.06;
+      smoothY += (pointerY - smoothY) * 0.06;
+
+      ctx.clearRect(0, 0, width, height);
+      const scrollDepth = Math.min(260, window.scrollY * 0.35);
+
+      // 1. 3D Spatial Particles
+      const projectedParticles = [];
+      for (const p of particles) {
+        const zDrift = ((p.z + scrollDepth + t * 18) % 850) - 220;
+        const pt = projectPoint3D(
+          p.x, p.y, zDrift,
+          smoothY * 0.22,
+          smoothX * 0.28,
+          0,
+          560,
+          width * 0.5,
+          height * 0.5
+        );
+        const depthAlpha = Math.max(0.04, Math.min(0.45, (1 - (pt.z + 220) / 850) * 0.45));
+        ctx.globalAlpha = depthAlpha;
+        ctx.fillStyle = p.accent ? themeColors.accent : themeColors.ink;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, p.r * pt.scale, 0, Math.PI * 2);
+        ctx.fill();
+        projectedParticles.push({ x: pt.x, y: pt.y, alpha: depthAlpha });
+      }
+
+      // Subtle wireframe threads between close 3D particles
+      ctx.lineWidth = 0.65;
+      ctx.strokeStyle = themeColors.ink;
+      for (let i = 0; i < projectedParticles.length; i++) {
+        for (let j = i + 1; j < Math.min(i + 8, projectedParticles.length); j++) {
+          const a = projectedParticles[i];
+          const b = projectedParticles[j];
+          const dist = Math.hypot(a.x - b.x, a.y - b.y);
+          if (dist < 115) {
+            ctx.globalAlpha = (1 - dist / 115) * 0.11;
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // 2. 3D Gyroscopic Astrolabe behind Portrait
+      const ringBase = Math.min(width * 0.38, 265);
+      drawRing(ringBase * 1.18, 72, 0.95 + smoothY * 0.35, t * 0.45 + smoothX * 0.4, 0.25, themeColors.ink, 0.26, 1.1);
+      drawRing(ringBase * 0.98, 64, -0.55 + t * 0.2 + smoothY * 0.3, 0.7 + smoothX * 0.35, -t * 0.3, themeColors.gold, 0.4, 1.4);
+      drawRing(ringBase * 0.82, 56, 1.25 + smoothY * 0.25, -t * 0.55, 0.6 + smoothX * 0.3, themeColors.accent, 0.42, 1.45);
+
+      // Meridian degree ticks on outer ring
+      ctx.strokeStyle = themeColors.gold;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.35;
+      for (let i = 0; i < 24; i++) {
+        const a = (i / 24) * Math.PI * 2;
+        const r1 = ringBase * 1.14, r2 = ringBase * 1.22;
+        const p1 = projectPoint3D(Math.cos(a) * r1, Math.sin(a) * r1, 0, 0.95 + smoothY * 0.35, t * 0.45 + smoothX * 0.4, 0.25, 720, anchorX, anchorY);
+        const p2 = projectPoint3D(Math.cos(a) * r2, Math.sin(a) * r2, 0, 0.95 + smoothY * 0.35, t * 0.45 + smoothX * 0.4, 0.25, 720, anchorX, anchorY);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+      }
+
+      // 3. 3D Rotating Octahedron Wireframe Halo + Vertex Nodes
+      const octR = ringBase * 1.3;
+      const projOct = octVerts.map(([vx, vy, vz]) =>
+        projectPoint3D(vx * octR, vy * octR, vz * octR, 0.35 + smoothY * 0.4, t * 0.32 + smoothX * 0.45, 0.18, 720, anchorX, anchorY)
+      );
+      ctx.strokeStyle = themeColors.accent;
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.24;
+      ctx.beginPath();
+      for (const [a, b] of octEdges) {
+        ctx.moveTo(projOct[a].x, projOct[a].y);
+        ctx.lineTo(projOct[b].x, projOct[b].y);
+      }
+      ctx.stroke();
+
+      for (const v of projOct) {
+        ctx.globalAlpha = 0.55;
+        ctx.fillStyle = themeColors.accent;
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, 2.5 * v.scale, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
+    }
+    if (!prefersReducedMotion) requestAnimationFrame(renderFrame);
+  }
+  renderFrame();
+})();
+
+/* ── F.R.I.D.A.Y LIVE 3D GEODESIC SPHERE CANVAS ── */
+(function initFridayOrb() {
+  const canvas = document.getElementById('friday-3d-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const w = 260, h = 180;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  let visible = true;
+  let hovered = false;
+  let phase = 0;
+
+  const parentCard = canvas.closest('.work-item');
+  if (parentCard) {
+    parentCard.addEventListener('pointerenter', () => { hovered = true; });
+    parentCard.addEventListener('pointerleave', () => { hovered = false; });
+  }
+
+  const orbObserver = new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+  }, { threshold: 0.05 });
+  orbObserver.observe(canvas);
+
+  // Fibonacci sphere nodes
+  const N = 34;
+  const nodes = [];
+  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2;
+    const radiusAtY = Math.sqrt(1 - y * y);
+    const theta = goldenAngle * i;
+    nodes.push({ x: Math.cos(theta) * radiusAtY, y, z: Math.sin(theta) * radiusAtY });
+  }
+
+  function renderOrb() {
+    if (visible && !document.hidden) {
+      if (!prefersReducedMotion) phase += hovered ? 0.028 : 0.012;
+      ctx.clearRect(0, 0, w, h);
+      const cx = w / 2, cy = h / 2 - 4;
+      const baseR = hovered ? 52 : 46;
+
+      // Tilted outer orbital ring
+      ctx.beginPath();
+      for (let i = 0; i <= 54; i++) {
+        const a = (i / 54) * Math.PI * 2;
+        const pt = projectPoint3D(Math.cos(a) * 68, Math.sin(a) * 68, 0, 1.05, phase * 0.7, 0.35, 320, cx, cy);
+        if (i === 0) ctx.moveTo(pt.x, pt.y); else ctx.lineTo(pt.x, pt.y);
+      }
+      ctx.strokeStyle = themeColors.accent;
+      ctx.globalAlpha = 0.45;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      // Geodesic sphere projection
+      const proj = nodes.map((n, idx) => {
+        const pulse = 1 + Math.sin(phase * 2.5 + idx * 0.5) * (hovered ? 0.08 : 0.03);
+        return projectPoint3D(n.x * baseR * pulse, n.y * baseR * pulse, n.z * baseR * pulse, 0.38, phase, 0.15, 320, cx, cy);
+      });
+
+      // Edges
+      ctx.strokeStyle = themeColors.ink;
+      ctx.lineWidth = 0.7;
+      for (let i = 0; i < proj.length; i++) {
+        for (let j = i + 1; j < proj.length; j++) {
+          const d = Math.hypot(proj[i].x - proj[j].x, proj[i].y - proj[j].y);
+          if (d < 34) {
+            ctx.globalAlpha = (1 - d / 34) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(proj[i].x, proj[i].y);
+            ctx.lineTo(proj[j].x, proj[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Nodes sorted back-to-front
+      proj.slice().sort((a, b) => b.z - a.z).forEach((p, idx) => {
+        const frontness = Math.max(0.25, Math.min(1, 0.7 - p.z / 120));
+        ctx.globalAlpha = frontness;
+        ctx.fillStyle = idx % 4 === 0 ? themeColors.accent : themeColors.ink;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.2 * p.scale, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Core glow dot
+      ctx.globalAlpha = 0.9;
+      ctx.fillStyle = themeColors.accent;
+      ctx.beginPath();
+      ctx.arc(cx, cy, hovered ? 5.5 : 4.2, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.globalAlpha = 0.75;
+      ctx.fillStyle = themeColors.ink;
+      ctx.font = '500 9px "JetBrains Mono", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('F · R · I · D · A · Y', cx, h - 10);
+      ctx.globalAlpha = 1;
+    }
+    if (!prefersReducedMotion) requestAnimationFrame(renderOrb);
+  }
+  renderOrb();
+})();
+
+/* ── PROJECT FILTERS ── */
+document.querySelectorAll('.filter-pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.work-item[data-cat]').forEach(card => {
+      const show = filter === 'all' || card.dataset.cat === filter;
+      card.classList.toggle('is-hidden', !show);
+    });
+  });
+});
+
+/* ── CASE STUDY MODAL ── */
+const PROJECTS_DATA = {
+  friday: {
+    kicker: 'Project N°01 · Flagship System',
+    title: 'F.R.I.D.A.Y AI',
+    summary: 'A personal AI assistant bridging voice interaction, web browsing, and everyday productivity tools through structured agentic tool-calling.',
+    highlights: [
+      'Voice-first and chat interface powered by OpenAI and ElevenLabs',
+      'Automated browser actions, Gmail triage, and Spotify playback control',
+      'FastAPI backend exposed securely for portfolio live chat integration'
+    ],
+    stack: ['Python + FastAPI', 'OpenAI Tool-Calling', 'ElevenLabs Voice Synthesis', 'Cloudflare Tunnel']
+  },
+  portfolio: {
+    kicker: 'Project N°02 · Web Craft',
+    title: 'The Payel Archive',
+    summary: 'A personal publication and portfolio pairing literary print typography with a custom 3D projection engine, pointer-reactive surfaces, and dual light/dark palettes.',
+    highlights: [
+      'Real-time 3D canvas astrolabe & depth-sorted particles',
+      'CSS 3D spatial tilt plates with zero-dependency spring physics',
+      'Accessible keyboard navigation, live NYC clock, and darkroom viewer'
+    ],
+    stack: ['Semantic HTML5', 'Modern CSS Grid & 3D Transforms', 'Vanilla ES6+ & HTML5 Canvas', 'Fraunces + Instrument Serif + JetBrains Mono']
+  },
+  lovevlog: {
+    kicker: 'Project N°03 · Editorial Narrative',
+    title: 'Love Vlog.',
+    summary: 'An intimate storytelling space designed around pacing, typography, and cinematic framing rather than algorithm-driven feeds.',
+    highlights: [
+      'Editorial film-strip rhythm and slow-scroll storytelling cadence',
+      'Minimal distraction UI putting photography and narrative first',
+      'Responsive pacing across mobile and desktop viewports'
+    ],
+    stack: ['HTML5', 'CSS Editorial Layouts', 'Narrative UX', 'Typography Systems']
+  },
+  calculator: {
+    kicker: 'Project N°04 · Micro-Craft',
+    title: 'Responsive Calculator',
+    summary: 'An exploration of everyday software utility — elevating basic arithmetic with tactile feedback, full keyboard shortcuts, and fluid layout geometry.',
+    highlights: [
+      '100% keyboard-operable arithmetic & clear/escape ergonomics',
+      'Fluid grid scaling across phones, tablets, and desktops',
+      'Clean state management without external frameworks'
+    ],
+    stack: ['HTML5', 'CSS Grid', 'Vanilla JavaScript', 'Keyboard Accessibility']
+  },
+  yaqeen: {
+    kicker: 'Project N°05 · Solo Mobile Product',
+    title: 'Yaqeen (يقين)',
+    summary: 'Islamic Daily Companion engineered from scratch in React Native and TypeScript — pairing serene dark-and-gold aesthetics with reliable location-aware prayer tracking.',
+    highlights: [
+      'Real-time location-based prayer schedule & live countdown ring',
+      'Salah streak tracking, Qaza counter, and Qibla compass',
+      'Smart dual notifications with custom adhan audio and Quran quote slideshow'
+    ],
+    stack: ['Expo SDK 56 & Expo Router', 'TypeScript + Zustand v5', 'Reanimated v4 + expo-notifications', 'Aladhan API + EAS Build'],
+    apkUrl: 'https://drive.google.com/uc?export=download&id=1U6S3av8EJi0YtlCCWTP1ksZ1OC-hDJga'
+  }
+};
+
+function openProjectModal(key) {
+  const data = PROJECTS_DATA[key];
+  if (!data) return;
+  document.getElementById('pm-kicker').textContent = data.kicker;
+  document.getElementById('pm-title').textContent = data.title;
+  document.getElementById('pm-summary').textContent = data.summary;
+
+  const hUl = document.getElementById('pm-highlights');
+  hUl.innerHTML = data.highlights.map(item => `<li>${item}</li>`).join('');
+  const sUl = document.getElementById('pm-stack');
+  sUl.innerHTML = data.stack.map(item => `<li>${item}</li>`).join('');
+
+  const actions = document.getElementById('pm-actions');
+  actions.innerHTML = '';
+  if (data.apkUrl) {
+    actions.innerHTML += `<a class="btn-download" href="${data.apkUrl}" target="_blank" rel="noopener noreferrer">↓ Download Android APK</a>`;
+  }
+  if (key === 'friday') {
+    actions.innerHTML += `<button type="button" class="btn-download" onclick="closeAllModals(); if(!fridayOpen) fridayToggle();">Open F.R.I.D.A.Y Chat ↗</button>`;
+  }
+  actions.innerHTML += `<button type="button" class="btn-secondary" onclick="closeAllModals()">Back to Works</button>`;
+
+  document.getElementById('project-modal').classList.add('open');
+}
+
+document.querySelectorAll('.work-item[data-project]').forEach(card => {
+  card.addEventListener('click', () => openProjectModal(card.dataset.project));
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openProjectModal(card.dataset.project);
+    }
+  });
+});
+
+/* ── GALLERY LIGHTBOX ── */
+const PLATES = [
+  { num: 'Plate I · 2024–2026', title: 'Peace of Mind, NY', src: 'gallery/plate-1.jpg' },
+  { num: 'Plate II · 2024–2026', title: 'Personal Photographer, NY', src: 'gallery/plate-2.jpg' },
+  { num: 'Plate III · 2024–2026', title: 'Sunset', src: 'gallery/plate-3.jpg' },
+  { num: 'Plate IV · 2024–2026', title: 'Snow Carpet, Central Park', src: 'gallery/plate-4.jpg' },
+  { num: 'Plate V · 2024–2026', title: 'Rockaway Sunset, Rockaway Beach', src: 'gallery/plate-5.jpg' },
+  { num: 'Plate VI · 2024–2026', title: 'Wave in The Sky', src: 'gallery/plate-6.jpg' },
+  { num: 'Plate VII · 2024–2026', title: 'Tools of observation', src: 'gallery/plate-7.jpg' }
+];
+let currentPlate = 0;
+
+function renderLightbox() {
+  const p = PLATES[currentPlate];
+  document.getElementById('lb-num').textContent = p.num;
+  document.getElementById('lb-title').textContent = p.title;
+  const stage = document.getElementById('lb-stage');
+  stage.innerHTML = `<img src="${p.src}" alt="${p.title}" onerror="renderGalleryFallback(this, '${p.num}', '${p.title}')">`;
+}
+
+function openLightbox(idx) {
+  currentPlate = (idx + PLATES.length) % PLATES.length;
+  renderLightbox();
+  document.getElementById('lightbox-modal').classList.add('open');
+}
+
+function stepLightbox(delta) {
+  currentPlate = (currentPlate + delta + PLATES.length) % PLATES.length;
+  renderLightbox();
+}
+
+document.querySelectorAll('.photo[data-plate]').forEach(btn => {
+  btn.addEventListener('click', () => openLightbox(parseInt(btn.dataset.plate, 10)));
+});
+
+function openCvModal() {
+  document.getElementById('cv-modal').classList.add('open');
+}
+
+function closeAllModals() {
+  document.querySelectorAll('.archive-modal').forEach(m => m.classList.remove('open'));
+}
+
+document.querySelectorAll('.archive-modal').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeAllModals();
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeAllModals();
+    if (fridayOpen) fridayToggle();
+  }
+  if (document.getElementById('lightbox-modal').classList.contains('open')) {
+    if (e.key === 'ArrowRight') stepLightbox(1);
+    if (e.key === 'ArrowLeft') stepLightbox(-1);
+  }
+});
+
+/* ── F.R.I.D.A.Y CHAT WIDGET + LOCAL FALLBACK ── */
+const FRIDAY_API = "https://instrumental-benefits-diet-groundwater.trycloudflare.com/chat";
+let fridayHistory = [];
+let fridayOpen = false;
+
+function fridayToggle() {
+  fridayOpen = !fridayOpen;
+  document.getElementById("friday-panel").classList.toggle("open", fridayOpen);
+  document.getElementById("friday-btn").setAttribute("aria-expanded", String(fridayOpen));
+  document.getElementById(fridayOpen ? "chat-input" : "friday-btn").focus();
+}
+
+function fridayAppend(role, text) {
+  const box = document.getElementById("chat-messages");
+  const div = document.createElement("div");
+  if (role === "friday") {
+    div.className = "msg msg-friday";
+    const sender = document.createElement('div');
+    sender.className = 'msg-sender';
+    sender.textContent = 'F.R.I.D.A.Y';
+    div.append(sender, document.createTextNode(String(text)));
+  } else {
+    div.className = "msg msg-user";
+    div.textContent = text;
+  }
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function fridayOfflineReply(query) {
+  const q = query.toLowerCase();
+  if (q.includes('yaqeen') || q.includes('app') || q.includes('mobile') || q.includes('prayer')) {
+    return "Yaqeen (يقين) is Eyamin's solo mobile app built with Expo SDK 56, TypeScript, Zustand v5, Reanimated v4, and the Aladhan API. It features real-time prayer times, streak tracking, dual adhan notifications, a Qibla compass, and a Qaza counter. You can grab the APK right under Project N°05!";
+  }
+  if (q.includes('friday') || q.includes('stack') || q.includes('ai') || q.includes('python')) {
+    return "F.R.I.D.A.Y is built in Python with FastAPI, OpenAI tool-calling, and ElevenLabs voice synthesis — connecting chat and voice with browser control, Spotify, and Gmail.";
+  }
+  if (q.includes('work') || q.includes('hire') || q.includes('open') || q.includes('contact') || q.includes('email')) {
+    return "Eyamin is based in Brooklyn, NY (studying Computer Information Systems at BMCC · CUNY) and is currently open to work and collaborations. Reach him at eyaminevnaypayel@gmail.com or via LinkedIn & GitHub below.";
+  }
+  if (q.includes('photo') || q.includes('gallery') || q.includes('camera')) {
+    return "Eyamin shoots street, sky, and quiet light observations on phone and film around New York — scroll to § 04 The Gallery to inspect Plates I–VII in the darkroom viewer.";
+  }
+  return "Live tunnel is sleeping right now, so I'm answering from the local archive! Ask me about Yaqeen, F.R.I.D.A.Y's stack, Eyamin's BMCC studies, photography, or reach him directly at eyaminevnaypayel@gmail.com.";
+}
+
+function fridayQuickAsk(text) {
+  const input = document.getElementById("chat-input");
+  input.value = text;
+  fridaySend();
+}
+
+async function fridaySend() {
+  const input = document.getElementById("chat-input");
+  const btn = document.getElementById("chat-send-btn");
+  const statusEl = document.getElementById("friday-status");
+  const text = input.value.trim();
+  if (!text || btn.disabled) return;
+
+  input.value = "";
+  fridayAppend("user", text);
+  fridayHistory.push({ role: "user", content: text });
+
+  const typing = document.getElementById("chat-typing");
+  typing.style.display = "block";
+  btn.disabled = true;
+  document.getElementById("chat-messages").scrollTop = 99999;
+
+  try {
+    const res = await fetch(FRIDAY_API, {
+      method: "POST",
+      signal: AbortSignal.timeout(7000),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: fridayHistory })
+    });
+    if (!res.ok) throw new Error("Unavailable");
+    const json = await res.json();
+    const reply = json.ok ? json.reply : fridayOfflineReply(text);
+    if (statusEl) statusEl.textContent = json.ok ? "Personal Assistant · Live Tunnel" : "Personal Assistant · Archive Mode";
+    fridayHistory.push({ role: "assistant", content: reply });
+    typing.style.display = "none";
+    fridayAppend("friday", reply);
+  } catch {
+    if (statusEl) statusEl.textContent = "Personal Assistant · Local Archive Mode";
+    const fallback = fridayOfflineReply(text);
+    fridayHistory.push({ role: "assistant", content: fallback });
+    typing.style.display = "none";
+    fridayAppend("friday", fallback);
+  } finally {
+    btn.disabled = false;
+    input.focus();
+  }
+}
+</script>
+</body>
+</html>
